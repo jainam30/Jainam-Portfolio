@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Antigravity Hero Background Animation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Google Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            overflow: hidden;
+            background: #ffffff;
+        }
+
+        #canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            text-align: center;
+            padding: 2rem;
+            color: #202124;
+        }
+
+        h1 {
+            font-size: 4rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+
+        p {
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: #5f6368;
+            max-width: 600px;
+        }
+
+        .cta-button {
+            margin-top: 2rem;
+            padding: 1rem 2rem;
+            background: #1a73e8;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background: #1557b0;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+    
+    <div class="hero-content">
+        <h1>Build the new way</h1>
+        <p>Experience the future of development with intelligent assistance</p>
+        <button class="cta-button">Get Started</button>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+
+        let width = canvas.width = window.innerWidth;
+        let height = canvas.height = window.innerHeight;
+
+        // Particle system for animated background
+        class Particle {
+            constructor() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.vx = (Math.random() - 0.5) * 0.5;
+                this.vy = (Math.random() - 0.5) * 0.5;
+                this.radius = Math.random() * 2 + 1;
+                this.opacity = Math.random() * 0.5 + 0.2;
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+
+                // Wrap around edges
+                if (this.x < 0) this.x = width;
+                if (this.x > width) this.x = 0;
+                if (this.y < 0) this.y = height;
+                if (this.y > height) this.y = 0;
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(66, 133, 244, ${this.opacity})`;
+                ctx.fill();
+            }
+        }
+
+        // Grid lines that move
+        class GridLine {
+            constructor(isVertical) {
+                this.isVertical = isVertical;
+                if (isVertical) {
+                    this.x = Math.random() * width;
+                    this.speed = (Math.random() - 0.5) * 0.3;
+                } else {
+                    this.y = Math.random() * height;
+                    this.speed = (Math.random() - 0.5) * 0.3;
+                }
+                this.opacity = Math.random() * 0.1 + 0.05;
+            }
+
+            update() {
+                if (this.isVertical) {
+                    this.x += this.speed;
+                    if (this.x < 0) this.x = width;
+                    if (this.x > width) this.x = 0;
+                } else {
+                    this.y += this.speed;
+                    if (this.y < 0) this.y = height;
+                    if (this.y > height) this.y = 0;
+                }
+            }
+
+            draw() {
+                ctx.strokeStyle = `rgba(66, 133, 244, ${this.opacity})`;
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                if (this.isVertical) {
+                    ctx.moveTo(this.x, 0);
+                    ctx.lineTo(this.x, height);
+                } else {
+                    ctx.moveTo(0, this.y);
+                    ctx.lineTo(width, this.y);
+                }
+                ctx.stroke();
+            }
+        }
+
+        // Create particles and grid lines
+        const particles = [];
+        const gridLines = [];
+        const particleCount = 100;
+        const gridLineCount = 20;
+
+        for (let i = 0; i < particleCount; i++) {
+            particles.push(new Particle());
+        }
+
+        for (let i = 0; i < gridLineCount; i++) {
+            gridLines.push(new GridLine(i % 2 === 0));
+        }
+
+        // Connect nearby particles with lines
+        function connectParticles() {
+            const maxDistance = 150;
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < maxDistance) {
+                        const opacity = (1 - distance / maxDistance) * 0.2;
+                        ctx.strokeStyle = `rgba(66, 133, 244, ${opacity})`;
+                        ctx.lineWidth = 1;
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        // Animation loop
+        function animate() {
+            // Clear with slight trail effect for smoother animation
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.1)';
+            ctx.fillRect(0, 0, width, height);
+
+            // Update and draw grid lines
+            gridLines.forEach(line => {
+                line.update();
+                line.draw();
+            });
+
+            // Update and draw particles
+            particles.forEach(particle => {
+                particle.update();
+                particle.draw();
+            });
+
+            // Connect particles
+            connectParticles();
+
+            requestAnimationFrame(animate);
+        }
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        });
+
+        // Start animation
+        animate();
+    </script>
+</body>
+</html>
