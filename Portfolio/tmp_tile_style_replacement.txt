@@ -1,0 +1,12 @@
+const tileStyle = (() => {
+              switch (key) {
+                case 'linkedin':
+                  return { backgroundImage: 'linear-gradient(135deg, #0ea5e9, #0a66c2)', border: '1px solid rgba(10,102,194,0.12)' }
+                case 'github':
+                  return { backgroundImage: 'linear-gradient(135deg,#374151,#111827)', border: '1px solid rgba(0,0,0,0.12)' }
+                case 'discord':
+                  return { backgroundImage: 'linear-gradient(135deg,#6366f1,#4f46e5)', border: '1px solid rgba(79,70,229,0.12)' }
+                default:
+                  return { backgroundColor: 'transparent', border: '1px solid rgba(0,0,0,0.06)' }
+              }
+            })()

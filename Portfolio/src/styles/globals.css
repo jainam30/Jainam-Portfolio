@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap');
+
+:root{ --bg:#F5F5F7; --text:#1C1C1E; --muted:#555; --card: rgba(255,255,255,0.82); }
+html,body,#__next{height:100%;}
+body{font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; background:var(--bg); color:var(--text);}
+
+/* Card */
+.card{ background: var(--card); border-radius: 18px; padding: 22px; border: 1px solid rgba(0,0,0,0.06); box-shadow: 0 10px 30px rgba(0,0,0,0.08); transition: transform .3s ease, box-shadow .3s ease; }
+.card:hover{ transform: translateY(-8px) scale(1.01); box-shadow: 0 28px 60px rgba(0,0,0,0.12); }
+
+/* Reveal */
+.reveal{ opacity: 0; transform: translateY(26px); transition: 700ms cubic-bezier(.2,.9,.2,1); }
+.reveal.visible{ opacity:1; transform: translateY(0); }
+
+.title-grad{ background: linear-gradient(120deg,#000,#666); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+
+.scene{ perspective:1600px; -webkit-perspective:1600px; }
+.scene-inner{ transform-style:preserve-3d; -webkit-transform-style:preserve-3d; }
+
+.vision-layer{ position:absolute; inset:0; pointer-events:none; will-change:transform,opacity; }
+.decor{ position:absolute; border-radius:999px; filter: blur(40px) saturate(120%); opacity:0.14; }
+.bloom{ position:absolute; width:420px; height:420px; border-radius:50%; filter:blur(80px) brightness(1.05); opacity:0.08; }
+
+.depth-card{ transform-style:preserve-3d; transition: transform .4s cubic-bezier(.2,.9,.2,1); }
+
+/* rotating conic-gradient background used by project cards */
+@keyframes rotateAnim {
+	from { transform: rotate(0deg); }
+	to { transform: rotate(360deg); }
+}
+
+/* small helper: inner shadow for white panel */
+.shadow-inner{ box-shadow: inset 0 0 20px rgba(0,0,0,0.04); }
+
+/* Center lone last card when grid has 2 columns and an odd number of items */
+@media (min-width: 768px) {
+	#projects .projects-grid > *:nth-child(odd):last-child {
+		grid-column: 1 / -1;
+		justify-self: center;
+		width: min(720px, 100%);
+	}
+}
+
