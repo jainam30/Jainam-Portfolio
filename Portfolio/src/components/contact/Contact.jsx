@@ -2,19 +2,19 @@ import React, { useState } from 'react'
 import useReveal from '@/utils/useReveal'
 import GradientCard from '../common/GradientCard'
 
-export default function Contact(){
+export default function Contact() {
   useReveal();
 
   const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' })
 
-  function handleChange(e){
+  function handleChange(e) {
     const { name, value } = e.target
     setForm(prev => ({ ...prev, [name]: value }))
   }
 
   const [status, setStatus] = useState({ submitting: false, success: null, error: '' })
 
-  async function handleSubmit(e){
+  async function handleSubmit(e) {
     e.preventDefault()
     setStatus({ submitting: true, success: null, error: '' })
 

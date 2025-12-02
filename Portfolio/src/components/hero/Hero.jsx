@@ -9,7 +9,6 @@ export default function Hero() {
     <section className="relative w-full overflow-hidden">
       <Scene>
         <div className="max-w-6xl mx-auto px-6 py-36 grid md:grid-cols-2 gap-12 items-center" style={{ transformStyle: 'preserve-3d' }}>
-
           <div className="reveal relative z-10" data-reveal style={{ transform: 'translateZ(40px)' }}>
             <h1 className="text-6xl font-semibold title-grad leading-tight">Crafting Modern Software</h1>
             <p className="text-lg text-[#1c1c1e] mt-6 max-w-xl leading-relaxed">
