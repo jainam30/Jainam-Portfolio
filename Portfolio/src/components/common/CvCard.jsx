@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-export default function CvCard({ pdfPath = '/Jainam_Jain_CV.pdf', title = 'SDE', role = 'Software Developer' }) {
+export default function CvCard({ pdfPath = '/Jainam_Jain_SDE.pdf', title = 'SDE', role = 'Software Developer' }) {
   const [hover, setHover] = useState(false)
 
   const containerStyle = {
