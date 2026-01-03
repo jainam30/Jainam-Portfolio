@@ -12,8 +12,8 @@ export default function Projects() {
       url: '/projects/doctor-appointment'
     },
     {
-      title: 'StitchFlow Suite (EMS)',
-      desc: 'Enterprise management system with role‑based dashboards and scalable architecture.',
+      title: 'StitchFlow Suite (ERP)',
+      desc: 'Enterprise Resource Planning system with role‑based dashboards and scalable architecture.',
       tech: 'React.js • Node.js • MySQL • Tailwind',
       url: '/projects/stitchflow-suite'
     },
@@ -32,13 +32,13 @@ export default function Projects() {
           Projects
         </h2>
         <div className="grid md:grid-cols-2 gap-10 projects-grid">
-        {projects.map((p, i) => (
-          <GradientCard key={i} index={i} url={p.url}>
-            <h3 className="text-2xl font-semibold mb-2">{p.title}</h3>
-            <p className="text-[#555] text-sm leading-relaxed mb-3">{p.desc}</p>
-            <p className="text-xs text-[#777]">{p.tech}</p>
-          </GradientCard>
-        ))}
+          {projects.map((p, i) => (
+            <GradientCard key={i} index={i} url={p.url}>
+              <h3 className="text-2xl font-semibold mb-2">{p.title}</h3>
+              <p className="text-[#555] text-sm leading-relaxed mb-3">{p.desc}</p>
+              <p className="text-xs text-[#777]">{p.tech}</p>
+            </GradientCard>
+          ))}
         </div>
       </div>
     </section>

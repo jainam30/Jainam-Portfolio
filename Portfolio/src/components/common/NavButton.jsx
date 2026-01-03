@@ -58,8 +58,8 @@ const StyledWrapper = styled.div`
     --border-radius: 24px;
     --padding: 4px;
     --transition: 0.4s;
-    --button-color: #101010;
-    --highlight-color-hue: 210deg;
+    --button-color: #14141F;
+    --highlight-color-hue: 270deg;
 
     position: relative;
     user-select: none;

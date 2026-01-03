@@ -6,8 +6,9 @@ import Experience from '@/components/experience/Experience'
 import Skills from '@/components/skills/Skills'
 import Projects from '@/components/projects/Projects'
 import Contact from '@/components/contact/Contact'
+import RobotGuide from '@/components/common/RobotGuide'
 
-export default function Home(){
+export default function Home() {
   return (
     <div className="min-h-screen">
       <Header />
@@ -20,6 +21,7 @@ export default function Home(){
         <Contact />
       </main>
       <Footer />
+      <RobotGuide />
     </div>
   )
 }

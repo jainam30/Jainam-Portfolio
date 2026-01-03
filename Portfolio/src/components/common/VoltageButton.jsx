@@ -41,19 +41,20 @@ const StyledWrapper = styled.div`
 
   .voltage-button button {
     color: white;
-    background: #0D1127;
+    background: #0A0A0F;
     padding: 1rem 3rem;
     border-radius: 5rem;
-    border: 5px solid #5978F3;
+    border: 5px solid #8B5CF6;
     font-size: 1.2rem;
     line-height: 1em;
     letter-spacing: 0.075em;
-    transition: background 0.3s;
+    transition: all 0.3s ease;
     cursor: pointer;
   }
 
   .voltage-button button:hover {
-    background: #0F1C53;
+    background: #14141F;
+    box-shadow: 0 0 30px rgba(139, 92, 246, 0.5);
   }
 
   .voltage-button button:hover + svg,
@@ -80,13 +81,13 @@ const StyledWrapper = styled.div`
   }
 
   .voltage-button svg path.line-1 {
-    stroke: #f6de8d;
+    stroke: #C084FC;
     stroke-dashoffset: 0;
     animation: spark-1 3s linear infinite;
   }
 
   .voltage-button svg path.line-2 {
-    stroke: #6bfeff;
+    stroke: #A78BFA;
     stroke-dashoffset: 500;
     animation: spark-2 3s linear infinite;
   }
