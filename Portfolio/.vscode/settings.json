@@ -6,8 +6,7 @@
     "less.validate": false,
     "less.lint.unknownAtRules": "ignore",
     "files.associations": {
-        "*.css": "tailwindcss",
-        "globals.css": "tailwindcss"
+        "globals.css": "scss"
     },
     "editor.quickSuggestions": {
         "strings": true
