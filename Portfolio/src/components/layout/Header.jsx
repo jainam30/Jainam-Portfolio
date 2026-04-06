@@ -1,4 +1,5 @@
 import { motion, useScroll } from 'framer-motion'
+import { useState } from 'react'
 import NavButton from '@/components/common/NavButton'
 
 export default function Header() {
