@@ -37,7 +37,7 @@ const Button = ({ links = [] }) => {
         </defs>
       </svg>
         <div className="relative">
-        <div className="absolute inset-0 bg-black/20 backdrop-blur-xl rounded-2xl border border-white/10 shadow-2xl" />
+        <div className="absolute inset-0 bg-slate-950/40 backdrop-blur-xl rounded-2xl border border-cyan-500/10 shadow-2xl" />
         <div className="relative flex items-end gap-x-2 p-2">
           {links.map((l, i) => {
             if (!l || !l.href) return null
@@ -45,19 +45,19 @@ const Button = ({ links = [] }) => {
             const tileStyle = (() => {
               switch (key) {
                 case 'linkedin':
-                  return { backgroundImage: 'linear-gradient(135deg, #0ea5e9, #0a66c2)', border: '1px solid rgba(10,102,194,0.12)' }
+                  return { backgroundImage: 'linear-gradient(135deg, #0ea5e9, #0a66c2)', border: '1px solid rgba(10,102,194,0.1)' }
                 case 'github':
-                  return { backgroundImage: 'linear-gradient(135deg,#374151,#111827)', border: '1px solid rgba(0,0,0,0.12)' }
+                  return { backgroundImage: 'linear-gradient(135deg,#1e293b,#0f172a)', border: '1px solid rgba(100,255,218,0.1)' }
                 case 'discord':
-                  return { backgroundImage: 'linear-gradient(135deg,#6366f1,#4f46e5)', border: '1px solid rgba(79,70,229,0.12)' }
+                  return { backgroundImage: 'linear-gradient(135deg,#4f46e5,#3730a3)', border: '1px solid rgba(79,70,229,0.1)' }
                 default:
-                  return { backgroundColor: 'transparent', border: '1px solid rgba(0,0,0,0.06)' }
+                  return { backgroundColor: 'transparent', border: '1px solid rgba(100,255,218,0.1)' }
               }
             })()
 
             return (
               <a key={i} href={l.href} target="_blank" rel="noopener noreferrer" aria-label={l.label}>
-                <div style={{ clipPath: 'url(#squircleClip)', ...tileStyle }} className="w-14 h-14 rounded-xl flex items-center justify-center shadow-lg cursor-pointer transform transition-all duration-300 ease-out hover:scale-110 hover:-translate-y-2 hover:shadow-2xl">
+                <div style={{ clipPath: 'url(#squircleClip)', ...tileStyle }} className="w-12 h-12 rounded-xl flex items-center justify-center shadow-lg cursor-pointer transform transition-all duration-300 ease-out hover:scale-110 hover:-translate-y-2 hover:shadow-cyan-500/20">
                   {iconFor(l.label)}
                 </div>
               </a>

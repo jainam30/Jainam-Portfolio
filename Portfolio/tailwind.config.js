@@ -3,17 +3,17 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        purple: {
-          primary: '#8B5CF6',
-          light: '#A78BFA',
-          lighter: '#C084FC',
-          dark: '#7C3AED',
-          darker: '#6D28D9',
+        cyan: {
+          primary: '#64FFDA',
+          light: '#94FFEB',
+          lighter: '#CCFFF5',
+          dark: '#45B29D',
+          darker: '#0A192F',
         },
-        black: {
-          bg: '#0A0A0F',
-          secondary: '#14141F',
-          tertiary: '#1E1E2E',
+        slate: {
+          950: '#020617',
+          900: '#0F172A',
+          800: '#1E293B',
         },
       },
       animation: {
@@ -27,8 +27,8 @@ module.exports = {
         xs: '2px',
       },
       boxShadow: {
-        'glow-purple': '0 0 20px rgba(139, 92, 246, 0.5), 0 0 40px rgba(139, 92, 246, 0.3)',
-        'glow-purple-intense': '0 0 30px rgba(139, 92, 246, 0.8), 0 0 60px rgba(139, 92, 246, 0.5)',
+        'glow-cyan': '0 0 20px rgba(100, 255, 218, 0.3), 0 0 40px rgba(100, 255, 218, 0.1)',
+        'glow-cyan-intense': '0 0 30px rgba(100, 255, 218, 0.5), 0 0 60px rgba(100, 255, 218, 0.3)',
       },
     },
   },

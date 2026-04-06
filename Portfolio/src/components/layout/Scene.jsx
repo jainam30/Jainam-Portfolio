@@ -38,15 +38,15 @@ export function Scene({children}){
     <div ref={ref} className="scene" style={{'--mx':0,'--my':0,'--scrollY':0}}>
       <div ref={innerRef} className="scene-inner">
         <VisionLayer depth={-140} className="vision-layer">
-          <div className="decor" style={{left:'10%',top:'8%',width:220,height:220,background:'linear-gradient(180deg,#0ea5ff,#7c3aed)'}}/>
+          <div className="decor" style={{left:'10%',top:'8%',width:220,height:220,background:'linear-gradient(180deg, var(--accent-primary), var(--accent-dark))', opacity: 0.15, filter: 'blur(40px)'}}/>
         </VisionLayer>
 
         <VisionLayer depth={-80} className="vision-layer">
-          <div className="decor" style={{right:'12%',top:'18%',width:160,height:160,background:'linear-gradient(180deg,#34d399,#60a5fa)'}}/>
+          <div className="decor" style={{right:'12%',top:'18%',width:160,height:160,background:'linear-gradient(180deg, #0ea5e9, #2563eb)', opacity: 0.1, filter: 'blur(30px)'}}/>
         </VisionLayer>
 
         <VisionLayer depth={-20} className="vision-layer">
-          <div className="decor" style={{left:'50%',top:'6%',width:300,height:300,background:'linear-gradient(180deg,#f0abfc,#c084fc)'}}/>
+          <div className="decor" style={{left:'50%',top:'6%',width:300,height:300,background:'linear-gradient(180deg, var(--accent-light), var(--accent-primary))', opacity: 0.1, filter: 'blur(50px)'}}/>
         </VisionLayer>
 
         <div style={{transformStyle:'preserve-3d'}}>
@@ -54,7 +54,7 @@ export function Scene({children}){
         </div>
 
         <VisionLayer depth={60} className="vision-layer">
-          <div className="bloom" style={{right:'8%',bottom:'6%',background:'#7c3aed'}} />
+          <div className="bloom" style={{right:'8%',bottom:'6%',background:'var(--accent-primary)', opacity: 0.1, filter: 'blur(60px)'}} />
         </VisionLayer>
       </div>
     </div>

@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import { motion, useScroll } from 'framer-motion'
 import NavButton from '@/components/common/NavButton'
 
 export default function Header() {
   const [open, setOpen] = useState(false)
+  const { scrollYProgress } = useScroll()
 
   const handleScroll = (href) => (e) => {
     e.preventDefault()
@@ -17,18 +18,23 @@ export default function Header() {
   }
 
   return (
-    <header className="sticky top-0 z-30 backdrop-blur-xl border-b" style={{
-      background: 'rgba(10, 10, 15, 0.7)',
-      borderColor: 'rgba(139, 92, 246, 0.2)',
-      boxShadow: '0 4px 20px rgba(139, 92, 246, 0.1)'
-    }}>
+    <header className="sticky top-0 z-50 backdrop-blur-md border-b border-cyan-500/10 bg-slate-950/70">
+      {/* Scroll Progress Bar */}
+      <motion.div
+        className="absolute bottom-0 left-0 right-0 h-[2px] bg-cyan-400 origin-left z-50"
+        style={{ scaleX: scrollYProgress }}
+      />
+      
       <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-        <h1 className="text-xl font-semibold tracking-tight title-grad">Jainam Jain</h1>
+        <h1 className="text-xl font-bold tracking-tight title-grad cursor-pointer" onClick={handleScroll('#')}>
+          Jainam Jain
+        </h1>
 
-        <div className="hidden md:flex gap-4 items-center">
+        <div className="hidden md:flex gap-6 items-center">
           <NavButton asButton href="#" onClick={handleScroll('#')} label="Home" />
           <NavButton asButton href="#about" onClick={handleScroll('#about')} label="About" />
           <NavButton asButton href="#skills" onClick={handleScroll('#skills')} label="Skills" />
+          <NavButton asButton href="#projects" onClick={handleScroll('#projects')} label="Projects" />
           <NavButton asButton href="#contact" onClick={handleScroll('#contact')} label="Contact" />
         </div>
 
@@ -37,8 +43,7 @@ export default function Header() {
           <button
             aria-label="Toggle menu"
             onClick={() => setOpen(v => !v)}
-            className="p-2 rounded-md hover:bg-purple-primary/20 transition-all"
-            style={{ color: '#A78BFA' }}
+            className="p-2 rounded-md hover:bg-cyan-500/10 transition-all text-cyan-400"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               {open ? (
@@ -52,17 +57,19 @@ export default function Header() {
       </div>
 
       {open && (
-        <div className="md:hidden backdrop-blur-lg border-t" style={{
-          background: 'rgba(10, 10, 15, 0.9)',
-          borderColor: 'rgba(139, 92, 246, 0.2)'
-        }}>
-          <div className="max-w-6xl mx-auto px-6 py-4 flex flex-col gap-3">
+        <motion.div 
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="md:hidden backdrop-blur-lg border-t border-cyan-500/10 bg-slate-950/90"
+        >
+          <div className="max-w-6xl mx-auto px-6 py-6 flex flex-col gap-4">
             <NavButton asButton href="#" onClick={handleScroll('#')} label="Home" />
             <NavButton asButton href="#about" onClick={handleScroll('#about')} label="About" />
             <NavButton asButton href="#skills" onClick={handleScroll('#skills')} label="Skills" />
+            <NavButton asButton href="#projects" onClick={handleScroll('#projects')} label="Projects" />
             <NavButton asButton href="#contact" onClick={handleScroll('#contact')} label="Contact" />
           </div>
-        </div>
+        </motion.div>
       )}
     </header>
   )

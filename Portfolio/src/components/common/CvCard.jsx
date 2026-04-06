@@ -11,26 +11,26 @@ export default function CvCard({ pdfPath = '/Jainam_Jain_Software_Developer.pdf'
 
   return (
     <>
-      <div
-        className="relative duration-500 group border-4 border-sky-900 overflow-hidden rounded-2xl h-52 w-72 bg-sky-800 p-5 flex flex-col items-start gap-4"
+    <div
+        className="relative duration-500 group border-2 border-cyan-500/20 overflow-hidden rounded-2xl h-52 w-72 bg-[#0F172A]/40 backdrop-blur-xl p-6 flex flex-col items-start gap-4 shadow-[0_0_20px_rgba(0,0,0,0.5)]"
         style={containerStyle}
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
       >
-        <div className="text-gray-50">
-          <span className="font-bold text-5xl">{title}</span>
-          <p className="text-xs">{role}</p>
+        <div className="text-white">
+          <span className="font-bold text-5xl tracking-tighter">{title}</span>
+          <p className="text-xs uppercase tracking-widest text-cyan-400 font-semibold mt-1">{role}</p>
         </div>
 
-        <div className="flex flex-col gap-2 w-full">
+        <div className="flex flex-col gap-2 w-full mt-2 relative z-20">
           <button
             onClick={() => setShowCv(true)}
-            className="w-full duration-300 hover:bg-sky-900 border bg-gray-50 font-semibold text-sky-800 text-xs py-2 px-2 flex justify-center items-center rounded"
+            className="w-full duration-300 hover:bg-cyan-500/20 border border-cyan-500/20 bg-slate-900/80 font-bold text-cyan-400 text-xs py-2 px-2 flex justify-center items-center rounded-lg"
           >
             View CV
           </button>
 
-          <a href={pdfPath} download aria-label="Download CV" className="w-full duration-300 hover:bg-sky-900 border bg-gray-50 font-semibold text-sky-800 text-xs py-2 px-2 flex justify-center items-center gap-2 rounded">
+          <a href={pdfPath} download aria-label="Download CV" className="w-full duration-300 hover:bg-cyan-500/20 border border-cyan-500/20 bg-slate-900/80 font-bold text-cyan-400 text-xs py-2 px-2 flex justify-center items-center gap-2 rounded-lg">
             Download
             <svg y="0" xmlns="http://www.w3.org/2000/svg" x="0" width="100" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet" height="100" className="w-4 h-4 fill-current">
               <path fillRule="evenodd" d="M22.1,77.9a4,4,0,0,1,4-4H73.9a4,4,0,0,1,0,8H26.1A4,4,0,0,1,22.1,77.9ZM35.2,47.2a4,4,0,0,1,5.7,0L46,52.3V22.1a4,4,0,1,1,8,0V52.3l5.1-5.1a4,4,0,0,1,5.7,0,4,4,0,0,1,0,5.6l-12,12a3.9,3.9,0,0,1-5.6,0l-12-12A4,4,0,0,1,35.2,47.2Z" />
@@ -38,8 +38,7 @@ export default function CvCard({ pdfPath = '/Jainam_Jain_Software_Developer.pdf'
           </a>
         </div>
 
-        <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" className="group-hover:scale-125 duration-500 absolute -bottom-0.5 -right-20 w-48 h-48 z-10 -my-2 fill-gray-50 stroke-sky-900"><path strokeWidth="5" strokeMiterlimit="10" d="M 50.4 51 C 40.5 49.1 40 46 40 44 v -1.2 a 18.9 18.9 0 0 0 5.7 -8.8 h 0.1 c 3 0 3.8 -6.3 3.8 -7.3 s 0.1 -4.7 -3 -4.7 C 53 4 30 0 22.3 6 c -5.4 0 -5.9 8 -3.9 16 c -3.1 0 -3 3.8 -3 4.7 s 0.7 7.3 3.8 7.3 c 1 3.6 2.3 6.9 4.7 9 v 1.2 c 0 2 0.5 5 -9.5 6.8 S 2 62 2 62 h 60 a 14.6 14.6 0 0 0 -11.6 -11 z" data-name="layer1"></path></svg>
-        <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" className="group-hover:scale-125 duration-200 absolute -bottom-0.5 -right-20 w-48 h-48 z-10 -my-2 fill-gray-50 stroke-sky-700"><path strokeWidth="2" strokeMiterlimit="10" d="M 50.4 51 C 40.5 49.1 40 46 40 44 v -1.2 a 18.9 18.9 0 0 0 5.7 -8.8 h 0.1 c 3 0 3.8 -6.3 3.8 -7.3 s 0.1 -4.7 -3 -4.7 C 53 4 30 0 22.3 6 c -5.4 0 -5.9 8 -3.9 16 c -3.1 0 -3 3.8 -3 4.7 s 0.7 7.3 3.8 7.3 c 1 3.6 2.3 6.9 4.7 9 v 1.2 c 0 2 0.5 5 -9.5 6.8 S 2 62 2 62 h 60 a 14.6 14.6 0 0 0 -11.6 -11 z" data-name="layer1"></path></svg>
+        <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" className="group-hover:scale-125 duration-500 absolute -bottom-0.5 -right-20 w-48 h-48 z-10 -my-2 fill-cyan-400/5 stroke-cyan-500/10"><path strokeWidth="1" strokeMiterlimit="10" d="M 50.4 51 C 40.5 49.1 40 46 40 44 v -1.2 a 18.9 18.9 0 0 0 5.7 -8.8 h 0.1 c 3 0 3.8 -6.3 3.8 -7.3 s 0.1 -4.7 -3 -4.7 C 53 4 30 0 22.3 6 c -5.4 0 -5.9 8 -3.9 16 c -3.1 0 -3 3.8 -3 4.7 s 0.7 7.3 3.8 7.3 c 1 3.6 2.3 6.9 4.7 9 v 1.2 c 0 2 0.5 5 -9.5 6.8 S 2 62 2 62 h 60 a 14.6 14.6 0 0 0 -11.6 -11 z" data-name="layer1"></path></svg>
       </div>
 
       {showCv && (

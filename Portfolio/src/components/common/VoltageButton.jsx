@@ -41,20 +41,23 @@ const StyledWrapper = styled.div`
 
   .voltage-button button {
     color: white;
-    background: #0A0A0F;
+    background: var(--black-bg);
     padding: 1rem 3rem;
     border-radius: 5rem;
-    border: 5px solid #8B5CF6;
+    border: 5px solid var(--accent-primary);
     font-size: 1.2rem;
     line-height: 1em;
     letter-spacing: 0.075em;
     transition: all 0.3s ease;
     cursor: pointer;
+    font-family: 'Sora', sans-serif;
+    font-weight: 600;
   }
 
   .voltage-button button:hover {
-    background: #14141F;
-    box-shadow: 0 0 30px rgba(139, 92, 246, 0.5);
+    background: var(--black-secondary);
+    box-shadow: 0 0 30px rgba(100, 255, 218, 0.3);
+    color: var(--accent-primary);
   }
 
   .voltage-button button:hover + svg,
@@ -81,13 +84,13 @@ const StyledWrapper = styled.div`
   }
 
   .voltage-button svg path.line-1 {
-    stroke: #C084FC;
+    stroke: var(--accent-light);
     stroke-dashoffset: 0;
     animation: spark-1 3s linear infinite;
   }
 
   .voltage-button svg path.line-2 {
-    stroke: #A78BFA;
+    stroke: var(--accent-primary);
     stroke-dashoffset: 500;
     animation: spark-2 3s linear infinite;
   }
@@ -99,12 +102,13 @@ const StyledWrapper = styled.div`
   }
 
   .voltage-button .dots .dot {
-    width: 1rem;
-    height: 1rem;
-    background: white;
+    width: 0.8rem;
+    height: 0.8rem;
+    background: var(--accent-primary);
     border-radius: 100%;
     position: absolute;
     opacity: 0;
+    box-shadow: 0 0 10px var(--accent-primary);
   }
 
   .voltage-button .dots .dot-1 {

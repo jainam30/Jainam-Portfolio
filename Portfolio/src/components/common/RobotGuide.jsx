@@ -208,12 +208,12 @@ export default function RobotGuide() {
           maxWidth: 'calc(100vw - 40px)',
           height: '500px',
           maxHeight: 'calc(100vh - 140px)',
-          background: 'rgba(20, 20, 30, 0.95)',
+          background: 'rgba(15, 23, 42, 0.95)',
           backdropFilter: 'blur(20px)',
           WebkitBackdropFilter: 'blur(20px)',
-          border: '2px solid rgba(139, 92, 246, 0.4)',
+          border: '2px solid rgba(100, 255, 218, 0.2)',
           borderRadius: '20px',
-          boxShadow: '0 20px 60px rgba(139, 92, 246, 0.3)',
+          boxShadow: '0 20px 60px rgba(0, 0, 0, 0.5)',
           display: 'flex',
           flexDirection: 'column',
           overflow: 'hidden',
@@ -222,34 +222,34 @@ export default function RobotGuide() {
           {/* Chat Header */}
           <div style={{
             padding: '16px 20px',
-            borderBottom: '1px solid rgba(139, 92, 246, 0.3)',
+            borderBottom: '1px solid rgba(100, 255, 218, 0.1)',
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
-            background: 'rgba(139, 92, 246, 0.1)'
+            background: 'rgba(100, 255, 218, 0.05)'
           }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
               <div style={{ width: '40px', height: '40px' }}>
                 <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                  <rect x="20" y="15" width="60" height="50" rx="12" fill="#E8E8F0" stroke="#8B5CF6" strokeWidth="2" />
-                  <line x1="50" y1="15" x2="50" y2="5" stroke="#8B5CF6" strokeWidth="2" strokeLinecap="round" />
-                  <circle cx="50" cy="5" r="3" fill="#C084FC">
+                  <rect x="20" y="15" width="60" height="50" rx="12" fill="#F8FAFC" stroke="var(--accent-primary)" strokeWidth="2" />
+                  <line x1="50" y1="15" x2="50" y2="5" stroke="var(--accent-primary)" strokeWidth="2" strokeLinecap="round" />
+                  <circle cx="50" cy="5" r="3" fill="var(--accent-primary)">
                     <animate attributeName="opacity" values="1;0.5;1" dur="2s" repeatCount="indefinite" />
                   </circle>
-                  <circle cx="35" cy="35" r="8" fill="#1E1E2E" stroke="#8B5CF6" strokeWidth="2" />
-                  <circle cx="65" cy="35" r="8" fill="#1E1E2E" stroke="#8B5CF6" strokeWidth="2" />
-                  <circle cx="37" cy="33" r="3" fill="#8B5CF6" opacity="0.8" />
-                  <circle cx="67" cy="33" r="3" fill="#8B5CF6" opacity="0.8" />
-                  <path d="M 35 50 Q 50 55 65 50" fill="none" stroke="#8B5CF6" strokeWidth="2" strokeLinecap="round" />
-                  <rect x="25" y="65" width="50" height="25" rx="8" fill="#E8E8F0" stroke="#8B5CF6" strokeWidth="2" />
-                  <circle cx="40" cy="77" r="3" fill="#8B5CF6" opacity="0.6" />
-                  <circle cx="50" cy="77" r="3" fill="#8B5CF6" opacity="0.6" />
-                  <circle cx="60" cy="77" r="3" fill="#8B5CF6" opacity="0.6" />
+                  <circle cx="35" cy="35" r="8" fill="#0F172A" stroke="var(--accent-primary)" strokeWidth="2" />
+                  <circle cx="65" cy="35" r="8" fill="#0F172A" stroke="var(--accent-primary)" strokeWidth="2" />
+                  <circle cx="37" cy="33" r="3" fill="var(--accent-primary)" opacity="0.8" />
+                  <circle cx="67" cy="33" r="3" fill="var(--accent-primary)" opacity="0.8" />
+                  <path d="M 35 50 Q 50 55 65 50" fill="none" stroke="var(--accent-primary)" strokeWidth="2" strokeLinecap="round" />
+                  <rect x="25" y="65" width="50" height="25" rx="8" fill="#F8FAFC" stroke="var(--accent-primary)" strokeWidth="2" />
+                  <circle cx="40" cy="77" r="3" fill="var(--accent-primary)" opacity="0.6" />
+                  <circle cx="50" cy="77" r="3" fill="var(--accent-primary)" opacity="0.6" />
+                  <circle cx="60" cy="77" r="3" fill="var(--accent-primary)" opacity="0.6" />
                 </svg>
               </div>
               <div>
-                <div style={{ fontSize: '16px', fontWeight: '600', color: '#F5F5F7' }}>AI Assistant</div>
-                <div style={{ fontSize: '12px', color: '#A78BFA' }}>Online</div>
+                <div style={{ fontSize: '16px', fontWeight: '600', color: '#F8FAFC' }}>AI Assistant</div>
+                <div style={{ fontSize: '12px', color: 'var(--accent-primary)' }}>Online</div>
               </div>
             </div>
             <button
@@ -257,14 +257,14 @@ export default function RobotGuide() {
               style={{
                 background: 'transparent',
                 border: 'none',
-                color: '#A78BFA',
+                color: 'var(--accent-primary)',
                 fontSize: '24px',
                 cursor: 'pointer',
                 padding: '4px 8px',
                 transition: 'color 0.2s'
               }}
-              onMouseEnter={(e) => e.currentTarget.style.color = '#F5F5F7'}
-              onMouseLeave={(e) => e.currentTarget.style.color = '#A78BFA'}
+              onMouseEnter={(e) => e.currentTarget.style.color = '#FFF'}
+              onMouseLeave={(e) => e.currentTarget.style.color = 'var(--accent-primary)'}
             >
               ×
             </button>
@@ -293,9 +293,9 @@ export default function RobotGuide() {
                   padding: '12px 16px',
                   borderRadius: msg.type === 'user' ? '16px 16px 4px 16px' : '16px 16px 16px 4px',
                   background: msg.type === 'user'
-                    ? 'linear-gradient(135deg, #8B5CF6 0%, #C084FC 100%)'
-                    : 'rgba(139, 92, 246, 0.15)',
-                  border: msg.type === 'user' ? 'none' : '1px solid rgba(139, 92, 246, 0.3)',
+                    ? 'linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-dark) 100%)'
+                    : 'rgba(100, 255, 218, 0.05)',
+                  border: msg.type === 'user' ? 'none' : '1px solid rgba(100, 255, 218, 0.1)',
                   color: '#F5F5F7',
                   fontSize: '14px',
                   lineHeight: '1.5',
@@ -317,8 +317,8 @@ export default function RobotGuide() {
                 <div style={{
                   padding: '12px 16px',
                   borderRadius: '16px 16px 16px 4px',
-                  background: 'rgba(139, 92, 246, 0.15)',
-                  border: '1px solid rgba(139, 92, 246, 0.3)',
+                  background: 'rgba(100, 255, 218, 0.05)',
+                  border: '1px solid rgba(100, 255, 218, 0.1)',
                   display: 'flex',
                   gap: '4px',
                   alignItems: 'center'
@@ -327,21 +327,21 @@ export default function RobotGuide() {
                     width: '8px',
                     height: '8px',
                     borderRadius: '50%',
-                    background: '#A78BFA',
+                    background: 'var(--accent-primary)',
                     animation: 'typingDot 1.4s infinite'
                   }} />
                   <div className="typing-dot" style={{
                     width: '8px',
                     height: '8px',
                     borderRadius: '50%',
-                    background: '#A78BFA',
+                    background: 'var(--accent-primary)',
                     animation: 'typingDot 1.4s infinite 0.2s'
                   }} />
                   <div className="typing-dot" style={{
                     width: '8px',
                     height: '8px',
                     borderRadius: '50%',
-                    background: '#A78BFA',
+                    background: 'var(--accent-primary)',
                     animation: 'typingDot 1.4s infinite 0.4s'
                   }} />
                 </div>
@@ -354,8 +354,8 @@ export default function RobotGuide() {
           {/* Input Area */}
           <div style={{
             padding: '16px',
-            borderTop: '1px solid rgba(139, 92, 246, 0.3)',
-            background: 'rgba(139, 92, 246, 0.05)'
+            borderTop: '1px solid rgba(100, 255, 218, 0.1)',
+            background: 'rgba(100, 255, 218, 0.02)'
           }}>
             <div style={{
               display: 'flex',
@@ -373,15 +373,15 @@ export default function RobotGuide() {
                   flex: 1,
                   padding: '12px 16px',
                   borderRadius: '12px',
-                  background: 'rgba(10, 10, 15, 0.6)',
-                  border: '1px solid rgba(139, 92, 246, 0.3)',
-                  color: '#F5F5F7',
+                  background: 'rgba(2, 6, 23, 0.6)',
+                  border: '1px solid rgba(100, 255, 218, 0.1)',
+                  color: '#F8FAFC',
                   fontSize: '14px',
                   outline: 'none',
                   transition: 'border-color 0.2s'
                 }}
-                onFocus={(e) => e.target.style.borderColor = 'rgba(139, 92, 246, 0.6)'}
-                onBlur={(e) => e.target.style.borderColor = 'rgba(139, 92, 246, 0.3)'}
+                onFocus={(e) => e.target.style.borderColor = 'var(--accent-primary)'}
+                onBlur={(e) => e.target.style.borderColor = 'rgba(100, 255, 218, 0.1)'}
               />
               <button
                 onClick={handleSendMessage}
@@ -389,14 +389,14 @@ export default function RobotGuide() {
                 style={{
                   padding: '12px 20px',
                   borderRadius: '12px',
-                  background: inputValue.trim() ? 'linear-gradient(135deg, #8B5CF6 0%, #C084FC 100%)' : 'rgba(139, 92, 246, 0.3)',
+                  background: inputValue.trim() ? 'linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-dark) 100%)' : 'rgba(100, 255, 218, 0.2)',
                   border: 'none',
-                  color: '#F5F5F7',
+                  color: '#020617',
                   fontSize: '14px',
                   fontWeight: '600',
                   cursor: inputValue.trim() ? 'pointer' : 'not-allowed',
                   transition: 'transform 0.2s, box-shadow 0.2s',
-                  boxShadow: inputValue.trim() ? '0 4px 15px rgba(139, 92, 246, 0.4)' : 'none'
+                  boxShadow: inputValue.trim() ? '0 4px 15px rgba(100, 255, 218, 0.2)' : 'none'
                 }}
                 onMouseEnter={(e) => {
                   if (inputValue.trim()) {
@@ -417,14 +417,14 @@ export default function RobotGuide() {
       {/* Tooltip (only show when chat is closed) */}
       {!isMinimized && !isChatOpen && (
         <div className="speech-bubble" style={{
-          background: 'rgba(139, 92, 246, 0.15)',
+          background: 'rgba(2, 6, 23, 0.8)',
           backdropFilter: 'blur(20px)',
           WebkitBackdropFilter: 'blur(20px)',
-          border: '2px solid rgba(139, 92, 246, 0.4)',
+          border: '2px solid rgba(100, 255, 218, 0.2)',
           borderRadius: '16px',
           padding: '12px 16px',
           maxWidth: '280px',
-          boxShadow: '0 8px 32px rgba(139, 92, 246, 0.3)',
+          boxShadow: '0 8px 32px rgba(0, 0, 0, 0.5)',
           animation: 'fadeIn 0.5s ease-in-out',
           position: 'relative'
         }}>
@@ -445,7 +445,7 @@ export default function RobotGuide() {
             height: '0',
             borderLeft: '8px solid transparent',
             borderRight: '8px solid transparent',
-            borderTop: '8px solid rgba(139, 92, 246, 0.4)'
+            borderTop: '8px solid rgba(100, 255, 218, 0.2)'
           }} />
         </div>
       )}
@@ -460,7 +460,7 @@ export default function RobotGuide() {
           cursor: 'pointer',
           animation: 'float 3s ease-in-out infinite',
           transition: 'transform 0.3s ease',
-          filter: 'drop-shadow(0 4px 20px rgba(139, 92, 246, 0.4))',
+          filter: 'drop-shadow(0 4px 20px rgba(100, 255, 218, 0.2))',
           position: 'relative'
         }}
         onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.1)'}
@@ -468,48 +468,48 @@ export default function RobotGuide() {
       >
         <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
           {/* Robot Head */}
-          <rect x="20" y="15" width="60" height="50" rx="12" fill="#E8E8F0" stroke="#8B5CF6" strokeWidth="2" />
+          <rect x="20" y="15" width="60" height="50" rx="12" fill="#F8FAFC" stroke="var(--accent-primary)" strokeWidth="2" />
 
           {/* Antenna */}
-          <line x1="50" y1="15" x2="50" y2="5" stroke="#8B5CF6" strokeWidth="2" strokeLinecap="round" />
-          <circle cx="50" cy="5" r="3" fill="#C084FC">
+          <line x1="50" y1="15" x2="50" y2="5" stroke="var(--accent-primary)" strokeWidth="2" strokeLinecap="round" />
+          <circle cx="50" cy="5" r="3" fill="var(--accent-primary)">
             <animate attributeName="opacity" values="1;0.5;1" dur="2s" repeatCount="indefinite" />
           </circle>
 
           {/* Eyes */}
-          <circle cx="35" cy="35" r="8" fill="#1E1E2E" stroke="#8B5CF6" strokeWidth="2">
+          <circle cx="35" cy="35" r="8" fill="#0F172A" stroke="var(--accent-primary)" strokeWidth="2">
             <animate attributeName="r" values="8;9;8" dur="3s" repeatCount="indefinite" />
           </circle>
-          <circle cx="65" cy="35" r="8" fill="#1E1E2E" stroke="#8B5CF6" strokeWidth="2">
+          <circle cx="65" cy="35" r="8" fill="#0F172A" stroke="var(--accent-primary)" strokeWidth="2">
             <animate attributeName="r" values="8;9;8" dur="3s" repeatCount="indefinite" />
           </circle>
 
           {/* Eye highlights */}
-          <circle cx="37" cy="33" r="3" fill="#8B5CF6" opacity="0.8">
+          <circle cx="37" cy="33" r="3" fill="var(--accent-primary)" opacity="0.8">
             <animate attributeName="opacity" values="0.8;1;0.8" dur="2s" repeatCount="indefinite" />
           </circle>
-          <circle cx="67" cy="33" r="3" fill="#8B5CF6" opacity="0.8">
+          <circle cx="67" cy="33" r="3" fill="var(--accent-primary)" opacity="0.8">
             <animate attributeName="opacity" values="0.8;1;0.8" dur="2s" repeatCount="indefinite" />
           </circle>
 
           {/* Smile */}
-          <path d="M 35 50 Q 50 55 65 50" fill="none" stroke="#8B5CF6" strokeWidth="2" strokeLinecap="round" />
+          <path d="M 35 50 Q 50 55 65 50" fill="none" stroke="var(--accent-primary)" strokeWidth="2" strokeLinecap="round" />
 
           {/* Body */}
-          <rect x="25" y="65" width="50" height="25" rx="8" fill="#E8E8F0" stroke="#8B5CF6" strokeWidth="2" />
+          <rect x="25" y="65" width="50" height="25" rx="8" fill="#F8FAFC" stroke="var(--accent-primary)" strokeWidth="2" />
 
           {/* Body details */}
-          <circle cx="40" cy="77" r="3" fill="#8B5CF6" opacity="0.6" />
-          <circle cx="50" cy="77" r="3" fill="#8B5CF6" opacity="0.6" />
-          <circle cx="60" cy="77" r="3" fill="#8B5CF6" opacity="0.6" />
+          <circle cx="40" cy="77" r="3" fill="var(--accent-primary)" opacity="0.6" />
+          <circle cx="50" cy="77" r="3" fill="var(--accent-primary)" opacity="0.6" />
+          <circle cx="60" cy="77" r="3" fill="var(--accent-primary)" opacity="0.6" />
 
           {/* Arms */}
-          <rect x="10" y="70" width="15" height="8" rx="4" fill="#E8E8F0" stroke="#8B5CF6" strokeWidth="2" />
-          <rect x="75" y="70" width="15" height="8" rx="4" fill="#E8E8F0" stroke="#8B5CF6" strokeWidth="2" />
+          <rect x="10" y="70" width="15" height="8" rx="4" fill="#F8FAFC" stroke="var(--accent-primary)" strokeWidth="2" />
+          <rect x="75" y="70" width="15" height="8" rx="4" fill="#F8FAFC" stroke="var(--accent-primary)" strokeWidth="2" />
 
           {/* Hands */}
-          <circle cx="10" cy="74" r="4" fill="#C084FC" />
-          <circle cx="90" cy="74" r="4" fill="#C084FC" />
+          <circle cx="10" cy="74" r="4" fill="var(--accent-primary)" />
+          <circle cx="90" cy="74" r="4" fill="var(--accent-primary)" />
         </svg>
 
         {/* Chat notification badge */}
@@ -521,14 +521,14 @@ export default function RobotGuide() {
             width: '24px',
             height: '24px',
             borderRadius: '50%',
-            background: 'linear-gradient(135deg, #8B5CF6 0%, #C084FC 100%)',
-            border: '2px solid #1E1E2E',
+            background: 'linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-dark) 100%)',
+            border: '2px solid #020617',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
             fontSize: '12px',
             fontWeight: 'bold',
-            color: '#FFF',
+            color: '#020617',
             animation: 'pulse 2s infinite'
           }}>
             💬
@@ -582,11 +582,11 @@ export default function RobotGuide() {
         @keyframes pulse {
           0%, 100% {
             transform: scale(1);
-            box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.7);
+            box-shadow: 0 0 0 0 rgba(100, 255, 218, 0.4);
           }
           50% {
             transform: scale(1.05);
-            box-shadow: 0 0 0 6px rgba(139, 92, 246, 0);
+            box-shadow: 0 0 0 10px rgba(100, 255, 218, 0);
           }
         }
 

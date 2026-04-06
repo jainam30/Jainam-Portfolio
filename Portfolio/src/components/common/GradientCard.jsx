@@ -8,52 +8,49 @@ const rotateAnim = keyframes`
 `
 
 export default function GradientCard({ children, index = 0, url }) {
-  const tz = `${20 + index * 6}px`
-
-  const inner = (
-    <div className="reveal gradient-card" data-reveal style={{ '--tz': tz }}>
-      <div className="gradient-overlay" />
-      <div className="content">{children}</div>
-    </div>
-  )
-
   return (
     <StyledWrapper>
       {url ? (
         <Link href={url} className="project-link" aria-label="Open project">
-          {inner}
+          <div className="gradient-card">
+            <div className="gradient-overlay" />
+            <div className="content">{children}</div>
+          </div>
         </Link>
       ) : (
-        inner
+        <div className="gradient-card">
+          <div className="gradient-overlay" />
+          <div className="content">{children}</div>
+        </div>
       )}
     </StyledWrapper>
   )
 }
 
 const StyledWrapper = styled.div`
-  .project-link { display:block; border-radius:20px }
-  .project-link:focus-visible { outline: 3px solid rgba(139, 92, 246, 0.5); outline-offset:4px }
+  .project-link { display:block; border-radius:20px; text-decoration: none; }
+  .project-link:focus-visible { outline: 3px solid var(--accent-primary); outline-offset:4px }
 
   .gradient-card {
     width: 100%;
     min-height: 200px;
-    background: #0A0A0F;
+    background: var(--black-bg);
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
     border-radius: 20px;
-    box-shadow: 0 18px 36px rgba(139, 92, 246, 0.25);
-    transform: translateZ(var(--tz, 20px));
-    transition: transform 300ms cubic-bezier(.2,.9,.2,1), box-shadow 300ms ease;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    transition: all 400ms cubic-bezier(.2,.9,.2,1);
+    transform-style: preserve-3d;
   }
 
   .gradient-card .content { 
     position: relative; 
     z-index: 3; 
-    padding: 1.5rem; 
-    max-width: 100% 
+    padding: 2rem; 
+    max-width: 100%;
   }
 
   .gradient-card .content h1,
@@ -62,7 +59,7 @@ const StyledWrapper = styled.div`
   .gradient-card .content h4,
   .gradient-card .content p,
   .gradient-card .content span {
-    color: #F5F5F7 !important;
+    color: var(--text-primary) !important;
   }
 
   .gradient-card::before {
@@ -72,36 +69,38 @@ const StyledWrapper = styled.div`
     height: 200%;
     background: conic-gradient(
       from 0deg at 50% 50%, 
-      #8B5CF6 0%, 
-      #C084FC 15%,
-      #A78BFA 30%,
-      #7C3AED 45%,
-      #6D28D9 60%,
-      #8B5CF6 75%,
-      #C084FC 90%,
-      #8B5CF6 100%
+      var(--accent-primary) 0%, 
+      var(--accent-light) 15%,
+      transparent 30%,
+      var(--accent-dark) 45%,
+      var(--accent-primary) 60%,
+      transparent 75%,
+      #FFF 90%,
+      var(--accent-primary) 100%
     );
-    animation: ${rotateAnim} 6s linear infinite;
-    filter: blur(12px) brightness(1.2);
+    animation: ${rotateAnim} 4s linear infinite;
+    filter: blur(15px);
     z-index: 0;
+    opacity: 0.6;
   }
 
   .gradient-card::after {
     content: "";
     position: absolute;
-    inset: 4px;
-    background: linear-gradient(135deg, #14141F 0%, #0A0A0F 100%);
-    border-radius: 16px;
+    inset: 2px;
+    background: linear-gradient(135deg, var(--black-secondary) 0%, var(--black-bg) 100%);
+    border-radius: 18px;
     z-index: 1;
-    box-shadow: inset 0 0 30px rgba(139, 92, 246, 0.15);
+    box-shadow: inset 0 0 40px rgba(100, 255, 218, 0.05);
   }
 
   .gradient-card .gradient-overlay {
     position: absolute;
     width: 100%;
     height: 100%;
-    background: radial-gradient(circle at center, transparent 20%, rgba(10, 10, 15, 0.4) 80%);
+    background: radial-gradient(circle at center, transparent 30%, var(--black-bg) 90%);
     z-index: 2;
+    opacity: 0.8;
   }
 
   @media (max-width: 640px) {
@@ -110,25 +109,27 @@ const StyledWrapper = styled.div`
       border-radius: 16px; 
     }
     .gradient-card .content { 
-      padding: 1.25rem; 
-    }
-    .project-link { 
-      border-radius: 16px; 
+      padding: 1.5rem; 
     }
     .gradient-card::before { 
-      filter: blur(10px) brightness(1.1); 
+      filter: blur(10px); 
     }
   }
 
-  .gradient-card:hover, .project-link:focus-visible .gradient-card {
-    transform: translateZ(var(--tz, 20px)) translateY(-10px) scale(1.03);
+  .gradient-card:hover {
+    transform: translateY(-12px) rotateX(4deg) rotateY(2deg);
     box-shadow: 
-      0 30px 70px rgba(139, 92, 246, 0.4),
-      0 0 60px rgba(139, 92, 246, 0.3);
+      0 20px 40px rgba(0, 0, 0, 0.4),
+      0 0 50px rgba(100, 255, 218, 0.1);
   }
 
   .gradient-card:hover::before {
-    filter: blur(15px) brightness(1.4);
+    opacity: 1;
+    animation-duration: 2s;
+  }
+
+  .project-link:hover .gradient-card {
+     border-color: var(--accent-primary);
   }
 `
 

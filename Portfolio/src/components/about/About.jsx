@@ -13,11 +13,13 @@ export default function About() {
 
         <div className="md:col-span-2">
           <GradientCard index={0}>
-            <h2 className="text-4xl font-semibold mb-4">About Me</h2>
-            <p className="text-lg leading-relaxed max-w-3xl" style={{ color: '#C4C4CC' }}>
-              AI-minded Software Developer focused on building scalable, high-quality applications.
-              As a fresher, I'm eager to join a forward-thinking environment where innovation, mentorship, and impactful engineering define the culture.
-            </p>
+            <div className="p-2">
+              <h2 className="text-4xl font-bold mb-6 text-white tracking-tight">About Me</h2>
+              <p className="text-lg leading-relaxed text-slate-300 font-medium">
+                AI-minded Software Developer focused on building <span className="text-cyan-400">scalable, high-quality applications</span>. 
+                As a fresher, I'm eager to join a forward-thinking environment where innovation, mentorship, and impactful engineering define the culture.
+              </p>
+            </div>
           </GradientCard>
         </div>
       </div>

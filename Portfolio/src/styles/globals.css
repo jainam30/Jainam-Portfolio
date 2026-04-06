@@ -5,33 +5,31 @@
 @tailwind utilities;
 /* stylelint-enable at-rule-no-unknown */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&display=swap');
 
 /* ========================================
-   PURPLE & BLACK THEME - COLOR SYSTEM
+   MIDNIGHT BLUE & CYAN THEME - COLOR SYSTEM
    ======================================== */
 :root {
-  /* Purple Palette */
-  --purple-primary: #8B5CF6;
-  --purple-light: #A78BFA;
-  --purple-lighter: #C084FC;
-  --purple-dark: #7C3AED;
-  --purple-darker: #6D28D9;
-
-  /* Black & Dark Tones */
-  --black-bg: #0A0A0F;
-  --black-secondary: #14141F;
-  --black-tertiary: #1E1E2E;
+  /* Cyan & Tech Palette */
+  --accent-primary: #64FFDA;
+  --accent-light: #94FFEB;
+  --accent-dark: #2DD4BF;
+  
+  /* Midnight Blue & Slate Tones */
+  --black-bg: #020617;
+  --black-secondary: #0F172A;
+  --black-tertiary: #1E293B;
 
   /* Glass & Overlay */
-  --glass-bg: rgba(139, 92, 246, 0.08);
-  --glass-border: rgba(139, 92, 246, 0.2);
-  --glass-hover: rgba(139, 92, 246, 0.15);
+  --glass-bg: rgba(100, 255, 218, 0.03);
+  --glass-border: rgba(100, 255, 218, 0.15);
+  --glass-hover: rgba(100, 255, 218, 0.1);
 
   /* Text Colors */
-  --text-primary: #F5F5F7;
-  --text-secondary: #C4C4CC;
-  --text-muted: #8B8B99;
+  --text-primary: #F8FAFC;
+  --text-secondary: #94A3B8;
+  --text-muted: #64748B;
 }
 
 /* ========================================
@@ -56,8 +54,8 @@ body,
 }
 
 body {
-  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
-  background: linear-gradient(135deg, var(--black-bg) 0%, var(--black-secondary) 50%, #1a0b2e 100%);
+  font-family: 'Sora', system-ui, -apple-system, sans-serif;
+  background: radial-gradient(circle at top right, #0A192F 0%, #020617 100%);
   background-attachment: fixed;
   color: var(--text-primary);
   overflow-x: hidden;
@@ -77,19 +75,19 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, var(--purple-primary), var(--purple-dark));
+  background: linear-gradient(180deg, var(--accent-primary), var(--accent-dark));
   border-radius: 10px;
   border: 2px solid var(--black-secondary);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, var(--purple-light), var(--purple-primary));
+  background: linear-gradient(180deg, var(--accent-light), var(--accent-primary));
 }
 
 /* Firefox */
 * {
   scrollbar-width: thin;
-  scrollbar-color: var(--purple-primary) var(--black-secondary);
+  scrollbar-color: var(--accent-primary) var(--black-secondary);
 }
 
 /* ========================================
@@ -103,8 +101,8 @@ body {
   padding: 28px;
   border: 1px solid var(--glass-border);
   box-shadow:
-    0 8px 32px rgba(139, 92, 246, 0.15),
-    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    0 8px 32px rgba(100, 255, 218, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.03);
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
@@ -117,17 +115,17 @@ body {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.1), transparent);
+  background: linear-gradient(90deg, transparent, rgba(100, 255, 218, 0.05), transparent);
   transition: left 0.5s ease;
 }
 
 .card:hover {
-  transform: translateY(-8px) scale(1.02);
+  transform: translateY(-8px) scale(1.01);
   box-shadow:
-    0 20px 60px rgba(139, 92, 246, 0.3),
-    0 0 40px rgba(139, 92, 246, 0.2),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1);
-  border-color: var(--purple-primary);
+    0 20px 60px rgba(100, 255, 218, 0.15),
+    0 0 40px rgba(100, 255, 218, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  border-color: var(--accent-primary);
 }
 
 .card:hover::before {
@@ -177,11 +175,11 @@ body {
    GRADIENT TEXT EFFECTS
    ======================================== */
 .title-grad {
-  background: linear-gradient(135deg, var(--purple-lighter) 0%, var(--purple-primary) 50%, var(--purple-dark) 100%);
+  background: linear-gradient(135deg, #FFF 0%, var(--accent-primary) 50%, var(--accent-dark) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  animation: gradientShift 3s ease infinite;
+  animation: gradientShift 4s ease infinite;
   background-size: 200% 200%;
 }
 
@@ -242,10 +240,10 @@ body {
   width: 500px;
   height: 500px;
   border-radius: 50%;
-  background: radial-gradient(circle, var(--purple-primary) 0%, transparent 70%);
+  background: radial-gradient(circle, var(--accent-primary) 0%, transparent 70%);
   filter: blur(100px);
-  opacity: 0.15;
-  animation: pulse 4s ease-in-out infinite;
+  opacity: 0.1;
+  animation: pulse 6s ease-in-out infinite;
 }
 
 @keyframes float {
@@ -300,16 +298,14 @@ body {
 /* ========================================
    GLOW EFFECTS
    ======================================== */
-.glow-purple {
-  box-shadow: 0 0 20px rgba(139, 92, 246, 0.5),
-    0 0 40px rgba(139, 92, 246, 0.3),
-    0 0 60px rgba(139, 92, 246, 0.2);
+.glow-cyan {
+  box-shadow: 0 0 20px rgba(100, 255, 218, 0.3),
+    0 0 40px rgba(100, 255, 218, 0.1);
 }
 
-.glow-purple-intense {
-  box-shadow: 0 0 30px rgba(139, 92, 246, 0.8),
-    0 0 60px rgba(139, 92, 246, 0.5),
-    0 0 90px rgba(139, 92, 246, 0.3);
+.glow-cyan-intense {
+  box-shadow: 0 0 30px rgba(100, 255, 218, 0.5),
+    0 0 60px rgba(100, 255, 218, 0.2);
 }
 
 /* ========================================
@@ -352,20 +348,20 @@ body {
    SELECTION STYLING
    ======================================== */
 ::selection {
-  background: var(--purple-primary);
-  color: white;
+  background: var(--accent-primary);
+  color: #020617;
 }
 
 ::-moz-selection {
-  background: var(--purple-primary);
-  color: white;
+  background: var(--accent-primary);
+  color: #020617;
 }
 
 /* ========================================
    FOCUS STYLES
    ======================================== */
 *:focus-visible {
-  outline: 2px solid var(--purple-primary);
+  outline: 2px solid var(--accent-primary);
   outline-offset: 4px;
   border-radius: 4px;
 }

@@ -38,9 +38,15 @@ export default function Projects() {
             <GradientCard key={i} index={i} url={p.url}>
               <div className="flex flex-col h-full">
                 <div className="flex-1">
-                  <h3 className="text-2xl font-semibold mb-2">{p.title}</h3>
-                  <p className="text-[#555] text-sm leading-relaxed mb-3">{p.desc}</p>
-                  <p className="text-xs text-[#777] mb-4">{p.tech}</p>
+                  <h3 className="text-2xl font-bold mb-3 text-white group-hover:text-cyan-400 transition-colors">{p.title}</h3>
+                  <p className="text-slate-400 text-sm leading-relaxed mb-4">{p.desc}</p>
+                  <div className="flex flex-wrap gap-2 mb-6">
+                    {p.tech.split(' • ').map((t, idx) => (
+                      <span key={idx} className="px-2 py-1 bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-[10px] uppercase tracking-wider font-bold rounded">
+                        {t}
+                      </span>
+                    ))}
+                  </div>
                 </div>
                 {p.liveUrl && (
                   <div className="mt-auto pt-2" onClick={(e) => e.stopPropagation()}>
@@ -48,11 +54,11 @@ export default function Projects() {
                       href={p.liveUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-violet-600 to-indigo-600 text-white text-xs font-semibold rounded-lg hover:shadow-lg hover:shadow-violet-500/30 transition-all duration-300 transform hover:-translate-y-0.5"
+                      className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-cyan-500 to-cyan-700 text-slate-950 text-xs font-bold rounded-lg hover:shadow-lg hover:shadow-cyan-500/30 transition-all duration-300 transform hover:-translate-y-0.5"
                     >
                       <span>View Live</span>
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                       </svg>
                     </a>
                   </div>
