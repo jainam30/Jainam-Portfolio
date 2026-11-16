@@ -2,6 +2,11 @@ module.exports = {
   content: ['./src/**/*.{js,jsx}'],
   theme: {
     extend: {
+      fontFamily: {
+        clash: ['"Clash Display"', 'system-ui', 'sans-serif'],
+        cabinet: ['"Cabinet Grotesk"', 'system-ui', 'sans-serif'],
+        instrument: ['"Instrument Serif"', 'Georgia', 'serif'],
+      },
       colors: {
         cyan: {
           primary: '#64FFDA',

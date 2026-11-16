@@ -1,0 +1,1681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Jainam Jain — The Portfolio Depot | Shipping Container Claw Portfolio</title>
+  
+  <!-- Fontshare Clash Display & Cabinet Grotesk -->
+  <link rel="preconnect" href="https://api.fontshare.com">
+  <link href="https://api.fontshare.com/v2/css?f[]=clash-display@600,700&f[]=cabinet-grotesk@400,500,600,700,800&display=swap" rel="stylesheet">
+  
+  <!-- Google Fonts: Instrument Serif italic -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
+
+  <style>
+    /* CSS RESET & VARIABLES */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    :root {
+      --bg-top: #0f74e0;
+      --bg-mid: #1f93f2;
+      --bg-bottom: #46b8ff;
+      --font-clash: 'Clash Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-cabinet: 'Cabinet Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-instrument: 'Instrument Serif', Georgia, serif;
+    }
+
+    body, html {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: linear-gradient(180deg, var(--bg-top) 0%, var(--bg-mid) 55%, var(--bg-bottom) 100%);
+      font-family: var(--font-cabinet);
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    /* 01 / LOOK: Blueprint grid overlay */
+    .blueprint-grid {
+      position: absolute;
+      inset: 0;
+      background-image: 
+        linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+      background-size: 44px 44px;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* 02 / NAVIGATION BAR (72px tall, sits on the blue) */
+    header.depot-nav {
+      position: relative;
+      height: 72px;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+      z-index: 40;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      background: none;
+      border: none;
+      outline: none;
+    }
+
+    .nav-logo img, .nav-logo-svg {
+      width: 112px;
+      height: auto;
+      filter: invert(1);
+      mix-blend-mode: screen;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .nav-btn {
+      background: none;
+      border: none;
+      font-family: var(--font-cabinet);
+      font-size: 15px;
+      font-weight: 700;
+      color: #e6f3ff;
+      cursor: pointer;
+      padding: 6px 12px;
+      border-radius: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .nav-btn:hover {
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    .nav-btn.active {
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.22);
+      box-shadow: 0 0 14px rgba(255, 255, 255, 0.25);
+    }
+
+    .nav-talk {
+      font-family: var(--font-clash);
+      font-weight: 700;
+      font-size: 16px;
+      color: #ffffff;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: transform 0.2s ease, color 0.2s ease;
+    }
+
+    .nav-talk:hover {
+      color: #d7ecff;
+      transform: translate(2px, -2px);
+    }
+
+    /* 03 / STAGE & 3D ENVIRONMENT */
+    main.depot-stage {
+      position: relative;
+      width: 100%;
+      height: calc(100vh - 72px);
+      height: calc(100dvh - 72px);
+      overflow: hidden;
+      perspective: 1200px;
+      -webkit-perspective: 1200px;
+      perspective-origin: 50% 45%;
+      -webkit-perspective-origin: 50% 45%;
+      cursor: default;
+      touch-action: manipulation;
+    }
+
+    /* Behind everything: Huge white word "PORTFOLIO" */
+    .backdrop-word {
+      position: absolute;
+      top: 58%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: var(--font-clash);
+      font-weight: 700;
+      font-size: clamp(90px, 19vw, 330px);
+      letter-spacing: -0.04em;
+      color: rgba(255, 255, 255, 0.22);
+      text-shadow: 0 4px 24px rgba(15, 116, 224, 0.35);
+      user-select: none;
+      pointer-events: none;
+      white-space: nowrap;
+      z-index: 2;
+    }
+
+    /* Top-left spaced line */
+    .depot-status {
+      position: absolute;
+      top: 24px;
+      left: 48px;
+      font-family: var(--font-cabinet);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      color: #d7ecff;
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    .depot-status span.highlight {
+      color: #ffd23f;
+    }
+
+    /* Frosted pill at bottom centre */
+    .frosted-pill {
+      position: absolute;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--font-cabinet);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.16);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      padding: 8px 22px;
+      border-radius: 9999px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+      cursor: pointer;
+      z-index: 35;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .frosted-pill:hover {
+      background: rgba(255, 255, 255, 0.25);
+      transform: translateX(-50%) scale(1.04);
+    }
+
+    /* 04 / THE RAIL AND CLAW CRANE */
+    .crane-assembly {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 30;
+      transform-style: preserve-3d;
+      -webkit-transform-style: preserve-3d;
+    }
+
+    .crane-rail {
+      position: absolute;
+      top: 16px;
+      left: 0;
+      width: 100%;
+      height: 16px;
+      background: linear-gradient(180deg, #ffffff 0%, #e2e8f0 55%, #94a3af 100%);
+      box-shadow: 0 8px 18px rgba(15, 116, 224, 0.4);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+    }
+
+    .crane-rail::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 50%;
+      height: 2px;
+      transform: translateY(-50%);
+      background-image: repeating-linear-gradient(90deg, #94a3b8 0, #94a3b8 6px, transparent 6px, transparent 12px);
+      opacity: 0.65;
+    }
+
+    /* Carriage, Rod, Grip Head, Fingers */
+    .crane-carriage-wrapper {
+      position: absolute;
+      top: 8px;
+      transform: translateX(-50%) translateZ(0px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transform-style: preserve-3d;
+      -webkit-transform-style: preserve-3d;
+      transition: left 0.75s cubic-bezier(.55, 0, .25, 1), transform 0.75s cubic-bezier(.55, 0, .25, 1);
+    }
+
+    .crane-carriage {
+      width: 68px;
+      height: 34px;
+      border-radius: 10px;
+      background: linear-gradient(180deg, #ffffff 0%, #f1f5f9 65%, #cbd5e1 100%);
+      border: 1px solid #ffffff;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.22);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 12px;
+      position: relative;
+    }
+
+    .wheel-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #64748b;
+      box-shadow: inset 0 1px 3px rgba(0,0,0,0.5);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+    }
+
+    .crane-carriage::before {
+      content: '';
+      position: absolute;
+      top: 2px;
+      left: 10px;
+      right: 10px;
+      height: 3px;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 9999px;
+    }
+
+    /* Chrome rod */
+    .crane-rod {
+      width: 9px;
+      height: 40px;
+      background: linear-gradient(90deg, #64748b 0%, #cbd5e1 25%, #ffffff 50%, #cbd5e1 75%, #475569 100%);
+      box-shadow: 0 0 6px rgba(0, 0, 0, 0.25);
+      transition: height 0.75s cubic-bezier(.55, 0, .25, 1);
+      position: relative;
+    }
+
+    .crane-rod::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: repeating-linear-gradient(180deg, rgba(0,0,0,0.4) 0 2px, transparent 2px 14px);
+      opacity: 0.2;
+    }
+
+    /* Grip head */
+    .crane-grip-assembly {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .crane-grip {
+      width: 72px;
+      height: 34px;
+      border-radius: 10px;
+      background: linear-gradient(180deg, #ffffff 0%, #f8fafc 50%, #cbd5e1 100%);
+      border: 1px solid #ffffff;
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.28);
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .crane-grip::before {
+      content: '';
+      width: 20px;
+      height: 8px;
+      border-radius: 3px;
+      background: #94a3b8;
+      box-shadow: inset 0 1px 3px rgba(0,0,0,0.4);
+    }
+
+    /* L-shaped clamping fingers */
+    .crane-finger-left, .crane-finger-right {
+      position: absolute;
+      top: 20px;
+      height: 58px;
+      transition: transform 0.4s cubic-bezier(.34, 1.56, .64, 1);
+    }
+
+    .crane-finger-left {
+      right: 50%;
+      transform-origin: top right;
+    }
+
+    .crane-finger-right {
+      left: 50%;
+      transform-origin: top left;
+    }
+
+    .crane-finger-left.open {
+      transform: rotate(-16deg);
+    }
+
+    .crane-finger-right.open {
+      transform: rotate(16deg);
+    }
+
+    .crane-finger-left.closed, .crane-finger-right.closed {
+      transform: rotate(0deg);
+    }
+
+    .finger-arm {
+      height: 12px;
+      background: linear-gradient(180deg, #ffffff 0%, #e2e8f0 70%, #94a3af 100%);
+      border-top: 1px solid #ffffff;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.18);
+    }
+
+    .crane-finger-left .finger-arm {
+      border-top-left-radius: 6px;
+      border-left: 1px solid #ffffff;
+    }
+
+    .crane-finger-right .finger-arm {
+      border-top-right-radius: 6px;
+      border-right: 1px solid #ffffff;
+    }
+
+    .finger-clamp {
+      width: 12px;
+      height: 48px;
+      background: linear-gradient(90deg, #cbd5e1 0%, #ffffff 50%, #94a3b8 100%);
+      border-bottom-left-radius: 6px;
+      border-bottom-right-radius: 6px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.22);
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      position: relative;
+    }
+
+    .crane-finger-left .finger-clamp {
+      margin-left: 0;
+    }
+
+    .crane-finger-right .finger-clamp {
+      margin-left: auto;
+    }
+
+    /* 05 / 3D CONTAINERS */
+    .containers-heap {
+      position: absolute;
+      inset: 0;
+      transform-style: preserve-3d;
+      -webkit-transform-style: preserve-3d;
+      z-index: 20;
+      pointer-events: none;
+    }
+
+    .container-box {
+      position: absolute;
+      transform-style: preserve-3d;
+      -webkit-transform-style: preserve-3d;
+      pointer-events: auto;
+      transition: left 0.85s cubic-bezier(.55, 0, .25, 1), 
+                  top 0.85s cubic-bezier(.55, 0, .25, 1), 
+                  transform 0.85s cubic-bezier(.55, 0, .25, 1), 
+                  width 0.85s cubic-bezier(.55, 0, .25, 1), 
+                  height 0.85s cubic-bezier(.55, 0, .25, 1),
+                  opacity 0.3s ease;
+    }
+
+    .container-box:not(.lifted) {
+      cursor: pointer;
+    }
+
+    .container-box:hover:not(.lifted) {
+      margin-top: -10px;
+    }
+
+    .container-box:focus-visible {
+      outline: 3px solid #ffd23f;
+      outline-offset: 4px;
+    }
+
+    .face {
+      position: absolute;
+      border: 1px solid rgba(0, 0, 0, 0.35);
+      transform-style: preserve-3d;
+      -webkit-transform-style: preserve-3d;
+      box-sizing: border-box;
+    }
+
+    .ribbed {
+      background-image: repeating-linear-gradient(
+        90deg,
+        rgba(0, 0, 0, 0.22) 0px,
+        rgba(0, 0, 0, 0.22) 6px,
+        rgba(255, 255, 255, 0.14) 6px,
+        rgba(255, 255, 255, 0.14) 12px
+      );
+    }
+
+    .ribbed-dark {
+      background-image: repeating-linear-gradient(
+        90deg,
+        rgba(0, 0, 0, 0.28) 0px,
+        rgba(0, 0, 0, 0.28) 5px,
+        rgba(255, 255, 255, 0.08) 5px,
+        rgba(255, 255, 255, 0.08) 10px
+      );
+    }
+
+    /* Back Wall & Inside Content */
+    .face-back-outer {
+      background-color: #0b1526;
+      border: 1px solid rgba(0,0,0,0.6);
+      pointer-events: none;
+    }
+
+    .face-back {
+      background-color: #070f1e;
+      box-shadow: inset 0 0 45px rgba(0,0,0,0.95);
+      overflow: hidden;
+      z-index: 30;
+    }
+
+    .inside-content {
+      width: 100%;
+      height: 100%;
+      padding: 16px 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      color: #f1f5f9;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.5s ease 0.3s;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      touch-action: pan-y;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255, 255, 255, 0.3) rgba(0, 0, 0, 0.25);
+      user-select: text;
+    }
+
+    .container-box.doors-open .inside-content {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .inside-kicker {
+      font-size: 0.65em;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      font-family: var(--font-cabinet);
+    }
+
+    .inside-heading {
+      font-family: var(--font-clash);
+      font-size: 1.35em;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 8px;
+      line-height: 1.15;
+    }
+
+    .inside-heading .accent-word {
+      font-family: var(--font-instrument);
+      font-style: italic;
+      font-weight: normal;
+      font-size: 1.25em;
+    }
+
+    .inside-text {
+      font-size: 0.88em;
+      line-height: 1.45;
+      color: #cbd5e1;
+      font-family: var(--font-cabinet);
+    }
+
+    /* Front Doors */
+    .door-left, .door-right {
+      position: absolute;
+      top: 0;
+      overflow: hidden;
+      transform-style: preserve-3d;
+      -webkit-transform-style: preserve-3d;
+      transition: transform 0.75s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .door-left {
+      left: 0;
+      transform-origin: left center;
+      border-right: 2px solid rgba(0, 0, 0, 0.5);
+    }
+
+    .door-right {
+      transform-origin: right center;
+      border-left: 2px solid rgba(0, 0, 0, 0.5);
+    }
+
+    .container-box.doors-open .door-left {
+      transform: translateZ(var(--half-depth)) rotateY(-122deg) !important;
+      box-shadow: 10px 0 25px rgba(0,0,0,0.4);
+      pointer-events: none !important;
+    }
+
+    .container-box.doors-open .door-right {
+      transform: translateZ(var(--half-depth)) rotateY(122deg) !important;
+      box-shadow: -10px 0 25px rgba(0,0,0,0.4);
+      pointer-events: none !important;
+    }
+
+    /* Outer door labels */
+    .door-label {
+      position: absolute;
+      top: 4px;
+      font-family: var(--font-clash);
+      font-weight: 700;
+      color: #ffffff;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+      line-height: 0.84;
+      pointer-events: none;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    }
+
+    .door-left .door-label {
+      left: 8px;
+    }
+
+    .door-right .door-label {
+      left: calc(-1 * var(--half-width) + 8px);
+    }
+
+    .door-tag {
+      position: absolute;
+      bottom: 6px;
+      right: 8px;
+      font-family: var(--font-cabinet);
+      font-weight: 800;
+      color: rgba(255, 255, 255, 0.9);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      pointer-events: none;
+    }
+
+    /* Vertical door rods */
+    .door-rod {
+      position: absolute;
+      top: 6px;
+      bottom: 6px;
+      width: 3px;
+      background: rgba(241, 245, 249, 0.85);
+      border-radius: 9999px;
+      border: 1px solid rgba(0, 0, 0, 0.35);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.25);
+    }
+
+    .door-left .door-rod {
+      right: 8px;
+    }
+
+    .door-right .door-rod {
+      left: 8px;
+    }
+
+    /* Pill Chips Inside Container */
+    .chip-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 8px;
+    }
+
+    .chip {
+      padding: 4px 10px;
+      border-radius: 9999px;
+      font-size: 0.75em;
+      font-weight: 700;
+      font-family: var(--font-cabinet);
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #ffffff;
+    }
+
+    .action-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-size: 0.82em;
+      font-weight: 700;
+      font-family: var(--font-cabinet);
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      transition: transform 0.2s ease;
+    }
+
+    .action-btn:hover {
+      transform: scale(1.05);
+    }
+
+    /* Modal for CV */
+    .cv-modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.82);
+      backdrop-filter: blur(8px);
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .cv-modal-backdrop.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .cv-modal {
+      width: 100%;
+      max-width: 900px;
+      height: 85vh;
+      background: #0f172a;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 16px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .cv-header {
+      padding: 16px 24px;
+      background: #020617;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    /* RESPONSIVE / PHONE LAYOUT (<= 700px) */
+    @media (max-width: 700px) {
+      header.depot-nav {
+        height: auto;
+        padding: 10px 14px;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .nav-row-one {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+      }
+
+      .nav-links {
+        gap: 16px;
+        justify-content: center;
+      }
+
+      .nav-btn {
+        font-size: 13px;
+        padding: 4px 8px;
+      }
+
+      .depot-status, .frosted-pill {
+        display: none !important;
+      }
+
+      main.depot-stage {
+        height: calc(100vh - 84px);
+      }
+
+      .inside-content {
+        padding: 12px 14px;
+        font-size: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="blueprint-grid"></div>
+
+  <!-- 02 / NAVIGATION BAR -->
+  <header class="depot-nav">
+    <div class="nav-row-one">
+      <button class="nav-logo" onclick="selectContainer(1)" aria-label="Go to PORTFOLIO container">
+        <img src="/logo.png" alt="Logo" class="nav-logo-svg">
+      </button>
+
+      <a href="mailto:jainamjainrj03@gmail.com" class="nav-talk" onclick="selectContainer(7)">
+        <span>Let's Talk</span>
+        <span>↗</span>
+      </a>
+    </div>
+
+    <div class="nav-links">
+      <button class="nav-btn" onclick="selectContainer(2)">Work</button>
+      <button class="nav-btn" onclick="selectContainer(3)">About</button>
+      <button class="nav-btn" onclick="selectContainer(4)">Process</button>
+      <button class="nav-btn" onclick="selectContainer(7)">Contact</button>
+    </div>
+  </header>
+
+  <!-- 01 / LOOK: STAGE -->
+  <main class="depot-stage" id="stage" onclick="handleStageClick(event)">
+    <!-- Huge backdrop word "PORTFOLIO" -->
+    <div class="backdrop-word" aria-hidden="true">PORTFOLIO</div>
+
+    <!-- Top-left indicator -->
+    <div class="depot-status">
+      <span>JAINAM'S DEPOT · </span>
+      <span class="highlight">7 CONTAINERS</span>
+      <span> · 2026</span>
+    </div>
+
+    <!-- Crane Assembly (Rail, Carriage, Rod, Grip Head, Fingers) -->
+    <div class="crane-assembly" aria-hidden="true">
+      <div class="crane-rail"></div>
+
+      <div class="crane-carriage-wrapper" id="craneCarriage">
+        <div class="crane-carriage">
+          <div class="wheel-dot"></div>
+          <div class="wheel-dot"></div>
+        </div>
+
+        <div class="crane-rod" id="craneRod"></div>
+
+        <!-- Grip Head Assembly -->
+        <div class="crane-grip-assembly">
+          <div class="crane-grip"></div>
+
+          <!-- Left Finger -->
+          <div class="crane-finger-left open" id="fingerLeft">
+            <div class="finger-arm" id="armLeft"></div>
+            <div class="finger-clamp"></div>
+          </div>
+
+          <!-- Right Finger -->
+          <div class="crane-finger-right open" id="fingerRight">
+            <div class="finger-arm" id="armRight"></div>
+            <div class="finger-clamp"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Containers Heap -->
+    <div class="containers-heap" id="containersHeap"></div>
+
+    <!-- Frosted Pill -->
+    <button class="frosted-pill" onclick="cycleNextContainer(event)">PICK A CONTAINER ↓</button>
+  </main>
+
+  <!-- Full CV Modal -->
+  <div class="cv-modal-backdrop" id="cvModal" onclick="closeCvModal()">
+    <div class="cv-modal" onclick="event.stopPropagation()">
+      <div class="cv-header">
+        <div>
+          <h3 style="color: #fff; font-family: var(--font-clash); font-size: 1.1rem; font-weight: 700;">Jainam Jain — Software Developer CV</h3>
+          <p style="color: #94a3b8; font-size: 0.8rem;">Official Resume & Credentials</p>
+        </div>
+        <div style="display: flex; gap: 12px; align-items: center;">
+          <a href="/Jainam_Jain_Software_Developer.pdf" target="_blank" class="action-btn" style="background: rgba(255,255,255,0.15); color: #fff;">Open Tab ↗</a>
+          <a href="/Jainam_Jain_Software_Developer.pdf" download class="action-btn" style="background: #ffd23f; color: #020617;">Download PDF</a>
+          <button onclick="closeCvModal()" style="background: none; border: none; color: #94a3b8; font-size: 1.4rem; cursor: pointer;">✕</button>
+        </div>
+      </div>
+      <iframe src="/Jainam_Jain_Software_Developer.pdf" style="width: 100%; height: 100%; border: none;"></iframe>
+    </div>
+  </div>
+
+  <script>
+    // DATA SPECIFICATIONS
+    const CONTAINERS_DATA = [
+      {
+        id: 1,
+        color: '#e5322d',
+        faceColor: '#e5322d',
+        darkShade: '#a91f1b',
+        labelTop: 'PORT',
+        labelBottom: 'FOLIO',
+        tag: 'JAINAM',
+        desktopPos: { x: 0.50, y: 0.56, rx: -10, ry: 0, rz: 0 },
+        phonePos: { x: 0.72, y: 0.50, rx: -12, ry: -14, rz: 0 },
+        kicker: '01 / HELLO',
+        headingPrefix: "Hi, I'm ",
+        headingAccent: "Jainam.",
+        headingSuffix: "",
+        contentHtml: `
+          <div style="font-size: 0.8em; font-family: 'Cabinet Grotesk', sans-serif; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px;">Full-Stack Developer • Software Engineer • Creative Technologist</div>
+          <p class="inside-text" style="font-size: 0.9em; line-height: 1.6; color: #e2e8f0;">A vibe coder and software developer with a curious mind, building scalable architecture and playful digital experiences. Every container in the depot holds a piece of my work.</p>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 8px; margin: 12px 0;">
+            <div style="padding: 8px 10px; background: rgba(255,255,255,0.06); border-radius: 8px; border: 1px solid rgba(255,255,255,0.1);">
+              <span style="font-size: 0.7em; color: #f87171; font-weight: bold; text-transform: uppercase;">Education</span>
+              <div style="font-size: 0.82em; color: #fff; font-weight: 600;">MCA Candidate</div>
+              <div style="font-size: 0.7em; color: #94a3b8;">Swaminarayan Univ (8.0 CGPA)</div>
+            </div>
+            <div style="padding: 8px 10px; background: rgba(255,255,255,0.06); border-radius: 8px; border: 1px solid rgba(255,255,255,0.1);">
+              <span style="font-size: 0.7em; color: #f87171; font-weight: bold; text-transform: uppercase;">Experience</span>
+              <div style="font-size: 0.82em; color: #fff; font-weight: 600;">Bluestock Fintech</div>
+              <div style="font-size: 0.7em; color: #94a3b8;">Software Dev Intern (APIs)</div>
+            </div>
+            <div style="padding: 8px 10px; background: rgba(255,255,255,0.06); border-radius: 8px; border: 1px solid rgba(255,255,255,0.1);">
+              <span style="font-size: 0.7em; color: #f87171; font-weight: bold; text-transform: uppercase;">Expertise</span>
+              <div style="font-size: 0.82em; color: #fff; font-weight: 600;">Full Stack Systems</div>
+              <div style="font-size: 0.7em; color: #94a3b8;">Next.js • Node • Databases</div>
+            </div>
+          </div>
+          <div style="margin-top: 14px; display: flex; flex-wrap: wrap; gap: 8px;">
+            <button class="action-btn" style="background: #e5322d; color: #fff; font-weight: bold; padding: 8px 14px; border-radius: 6px;" onclick="event.stopPropagation(); selectContainer(2)">Explore Work (02) →</button>
+            <button class="action-btn" style="background: rgba(255,255,255,0.15); color: #fff; padding: 8px 14px; border-radius: 6px;" onclick="event.stopPropagation(); openCvModal()">View Resume / CV</button>
+            <button class="action-btn" style="background: rgba(56, 189, 248, 0.15); border: 1px solid rgba(56, 189, 248, 0.4); color: #38bdf8; padding: 8px 14px; border-radius: 6px;" onclick="event.stopPropagation(); selectContainer(7)">Say Hello (07) ↗</button>
+            <a href="https://github.com/Jainam-03" target="_blank" rel="noopener noreferrer" class="action-btn" style="background: rgba(255,255,255,0.08); color: #cbd5e1; margin-left: auto; padding: 8px 12px; border-radius: 6px;" onclick="event.stopPropagation();">GitHub ↗</a>
+          </div>
+        `
+      },
+      {
+        id: 2,
+        color: '#f26a1f',
+        faceColor: '#f26a1f',
+        darkShade: '#b84a10',
+        labelTop: 'THE',
+        labelBottom: 'WORK',
+        tag: '02',
+        desktopPos: { x: 0.12, y: 0.77, rx: -12, ry: 16, rz: 0 },
+        phonePos: { x: 0.50, y: 0.88, rx: -14, ry: 0, rz: 0 },
+        kicker: '02 / SELECTED WORK',
+        headingPrefix: 'The ',
+        headingAccent: 'work.',
+        headingSuffix: '',
+        contentHtml: `
+          <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 6px;">
+            <div style="padding: 12px 14px; background: rgba(255,255,255,0.08); border-radius: 8px; border: 1px solid rgba(255,255,255,0.15); display: flex; flex-direction: column; gap: 4px;">
+              <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 6px;">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  <span style="font-weight: 700; color: #fff; font-size: 0.95em;">Doctor Appointment Portal</span>
+                  <span style="background: rgba(242,106,31,0.25); color: #fdba74; font-size: 0.68em; padding: 2px 6px; border-radius: 4px; font-weight: 700; font-family: monospace;">Full Stack • Healthcare</span>
+                </div>
+                <div style="display: flex; gap: 6px;">
+                  <a href="/projects/doctor-appointment" class="action-btn" style="background: #f26a1f; color: #020617; font-size: 0.75em; padding: 4px 10px; border-radius: 4px; font-weight: 800;" onclick="event.stopPropagation();">Live Demo ↗</a>
+                  <a href="https://github.com/Jainam-03" target="_blank" rel="noopener noreferrer" class="action-btn" style="background: rgba(255,255,255,0.15); color: #fff; font-size: 0.75em; padding: 4px 8px; border-radius: 4px;" onclick="event.stopPropagation();">Code ↗</a>
+                </div>
+              </div>
+              <p style="font-size: 0.8em; color: #cbd5e1; line-height: 1.4; margin: 0;">Complete doctor-patient scheduling portal with real-time booking, doctor schedule management, secure auth, and MySQL database.</p>
+              <div style="font-size: 0.72em; color: #fdba74; font-family: monospace; font-weight: bold;">PHP • MySQL • JavaScript • HTML5 / CSS3</div>
+            </div>
+
+            <div style="padding: 12px 14px; background: rgba(255,255,255,0.08); border-radius: 8px; border: 1px solid rgba(255,255,255,0.15); display: flex; flex-direction: column; gap: 4px;">
+              <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 6px;">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  <span style="font-weight: 700; color: #fff; font-size: 0.95em;">StitchFlow Suite (ERP)</span>
+                  <span style="background: rgba(242,106,31,0.25); color: #fdba74; font-size: 0.68em; padding: 2px 6px; border-radius: 4px; font-weight: 700; font-family: monospace;">Enterprise • ERP</span>
+                </div>
+                <div style="display: flex; gap: 6px;">
+                  <a href="https://stitchflow-suite.vercel.app/" target="_blank" rel="noopener noreferrer" class="action-btn" style="background: #f26a1f; color: #020617; font-size: 0.75em; padding: 4px 10px; border-radius: 4px; font-weight: 800;" onclick="event.stopPropagation();">Live App ↗</a>
+                  <a href="https://github.com/Jainam-03" target="_blank" rel="noopener noreferrer" class="action-btn" style="background: rgba(255,255,255,0.15); color: #fff; font-size: 0.75em; padding: 4px 8px; border-radius: 4px;" onclick="event.stopPropagation();">Code ↗</a>
+                </div>
+              </div>
+              <p style="font-size: 0.8em; color: #cbd5e1; line-height: 1.4; margin: 0;">Enterprise resource planning platform featuring modular dashboards, inventory supply flow tracking, order workflows, and role-based permissions.</p>
+              <div style="font-size: 0.72em; color: #fdba74; font-family: monospace; font-weight: bold;">React.js • Node.js • Express • MySQL • Tailwind</div>
+            </div>
+
+            <div style="padding: 12px 14px; background: rgba(255,255,255,0.08); border-radius: 8px; border: 1px solid rgba(255,255,255,0.15); display: flex; flex-direction: column; gap: 4px;">
+              <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 6px;">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  <span style="font-weight: 700; color: #fff; font-size: 0.95em;">SafeChat 360</span>
+                  <span style="background: rgba(242,106,31,0.25); color: #fdba74; font-size: 0.68em; padding: 2px 6px; border-radius: 4px; font-weight: 700; font-family: monospace;">AI & Security</span>
+                </div>
+                <div style="display: flex; gap: 6px;">
+                  <a href="https://safe-chat360.vercel.app/" target="_blank" rel="noopener noreferrer" class="action-btn" style="background: #f26a1f; color: #020617; font-size: 0.75em; padding: 4px 10px; border-radius: 4px; font-weight: 800;" onclick="event.stopPropagation();">Live App ↗</a>
+                  <a href="https://github.com/Jainam-03" target="_blank" rel="noopener noreferrer" class="action-btn" style="background: rgba(255,255,255,0.15); color: #fff; font-size: 0.75em; padding: 4px 8px; border-radius: 4px;" onclick="event.stopPropagation();">Code ↗</a>
+                </div>
+              </div>
+              <p style="font-size: 0.8em; color: #cbd5e1; line-height: 1.4; margin: 0;">AI-driven conversational safety platform with OpenAI GPT-5.1 moderation, low-latency Redis caching layer, Docker containerization, and real-time monitoring.</p>
+              <div style="font-size: 0.72em; color: #fdba74; font-family: monospace; font-weight: bold;">Next.js • TypeScript • OpenAI GPT • Redis • Docker</div>
+            </div>
+          </div>
+        `
+      },
+      {
+        id: 3,
+        color: '#1d55d8',
+        faceColor: '#1d55d8',
+        darkShade: '#123a9c',
+        labelTop: 'ABOUT',
+        labelBottom: 'ME',
+        tag: '03',
+        desktopPos: { x: 0.37, y: 0.78, rx: -12, ry: -8, rz: 0 },
+        phonePos: { x: 0.72, y: 0.63, rx: -12, ry: -12, rz: 0 },
+        kicker: '03 / ABOUT ME',
+        headingPrefix: 'A little ',
+        headingAccent: 'about',
+        headingSuffix: ' me.',
+        contentHtml: `
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin-top: 6px;">
+            <div>
+              <p class="inside-text" style="font-size: 0.88em; line-height: 1.6; color: #e2e8f0;">I design with AI as a creative partner: Figma, Claude and a lot of heart. Software Developer focused on building high-performance web systems, clean modular code, and scalable user-centric architectures.</p>
+              <div style="margin-top: 14px; display: flex; flex-wrap: wrap; gap: 8px;">
+                <a href="/Jainam_Jain_Software_Developer.pdf" download class="action-btn" style="background: #1d55d8; color: #fff; font-weight: bold; padding: 8px 14px; border-radius: 6px;" onclick="event.stopPropagation();">Download Official CV (PDF) ↓</a>
+                <button class="action-btn" style="background: rgba(255,255,255,0.15); color: #fff; padding: 8px 14px; border-radius: 6px;" onclick="event.stopPropagation(); openCvModal();">Preview CV</button>
+                <button class="action-btn" style="background: rgba(255,255,255,0.1); color: #cbd5e1; padding: 8px 14px; border-radius: 6px;" onclick="event.stopPropagation(); selectContainer(2);">See Projects (02) →</button>
+              </div>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+              <div style="padding: 10px 12px; background: rgba(255,255,255,0.06); border-radius: 8px; border: 1px solid rgba(255,255,255,0.1);">
+                <div style="font-size: 0.84em; font-weight: 700; color: #fff;">🎓 Master's of Computer Application (2024–2026)</div>
+                <div style="font-size: 0.78em; color: #93c5fd; font-weight: 600;">Swaminarayan University • 8.0 CGPA</div>
+                <div style="font-size: 0.72em; color: #94a3b8; margin-top: 2px;">Full Stack Architecture, Distributed Systems & Database Design</div>
+              </div>
+              <div style="padding: 10px 12px; background: rgba(255,255,255,0.06); border-radius: 8px; border: 1px solid rgba(255,255,255,0.1);">
+                <div style="font-size: 0.84em; font-weight: 700; color: #fff;">💼 Software Development Intern — Bluestock Fintech</div>
+                <div style="font-size: 0.78em; color: #93c5fd; font-weight: 600;">Backend Engineering & REST APIs</div>
+                <div style="font-size: 0.72em; color: #94a3b8; margin-top: 2px;">High-concurrency API design, database caching, and reliable microservices</div>
+              </div>
+            </div>
+          </div>
+        `
+      },
+      {
+        id: 4,
+        color: '#f6b919',
+        faceColor: '#f6b919',
+        darkShade: '#c08a0a',
+        labelTop: 'PRO',
+        labelBottom: 'CESS',
+        tag: '04',
+        desktopPos: { x: 0.63, y: 0.78, rx: -12, ry: 8, rz: 0 },
+        phonePos: { x: 0.28, y: 0.76, rx: -12, ry: 10, rz: 0 },
+        kicker: '04 / PROCESS',
+        headingPrefix: 'How I ',
+        headingAccent: 'build.',
+        headingSuffix: '',
+        contentHtml: `
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; margin-top: 8px;">
+            <div style="padding: 10px 12px; background: rgba(255,255,255,0.06); border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); display: flex; flex-direction: column; justify-content: space-between; gap: 8px;">
+              <span style="background: #f6b919; color: #020617; font-weight: 800; font-size: 0.72em; padding: 3px 8px; border-radius: 4px; width: fit-content;">01 / Architect</span>
+              <p style="font-size: 0.8em; color: #e2e8f0; line-height: 1.4; margin: 0;">Clarify project vision, design scalable data schemas, and draft robust system architecture.</p>
+            </div>
+            <div style="padding: 10px 12px; background: rgba(255,255,255,0.06); border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); display: flex; flex-direction: column; justify-content: space-between; gap: 8px;">
+              <span style="background: #f6b919; color: #020617; font-weight: 800; font-size: 0.72em; padding: 3px 8px; border-radius: 4px; width: fit-content;">02 / Develop</span>
+              <p style="font-size: 0.8em; color: #e2e8f0; line-height: 1.4; margin: 0;">Build with clean modular code, type safety, responsive UI, and optimized RESTful APIs.</p>
+            </div>
+            <div style="padding: 10px 12px; background: rgba(255,255,255,0.06); border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); display: flex; flex-direction: column; justify-content: space-between; gap: 8px;">
+              <span style="background: #f6b919; color: #020617; font-weight: 800; font-size: 0.72em; padding: 3px 8px; border-radius: 4px; width: fit-content;">03 / Deploy & Scale</span>
+              <p style="font-size: 0.8em; color: #e2e8f0; line-height: 1.4; margin: 0;">Ship to production with CI/CD, Docker containers, caching, and ongoing performance tuning.</p>
+            </div>
+          </div>
+          <div style="margin-top: 14px; display: flex; justify-content: space-between; align-items: center;">
+            <button class="action-btn" style="background: #f6b919; color: #020617; font-weight: 800; padding: 8px 14px; border-radius: 6px;" onclick="event.stopPropagation(); selectContainer(2);">See The Results In Work (02) →</button>
+            <span style="font-size: 0.72em; color: rgba(254, 240, 138, 0.8); font-family: monospace;">Disciplined Architecture • Fast Shipping</span>
+          </div>
+        `
+      },
+      {
+        id: 5,
+        color: '#97a1ad',
+        faceColor: '#97a1ad',
+        darkShade: '#6c7682',
+        labelTop: 'TOOL',
+        labelBottom: 'KIT',
+        tag: '05',
+        desktopPos: { x: 0.88, y: 0.77, rx: -12, ry: -16, rz: 0 },
+        phonePos: { x: 0.72, y: 0.76, rx: -12, ry: -10, rz: 0 },
+        kicker: '05 / TOOLKIT',
+        headingPrefix: "What's in the ",
+        headingAccent: 'box.',
+        headingSuffix: '',
+        contentHtml: `
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; margin-top: 8px;">
+            <div style="padding: 8px 10px; background: rgba(255,255,255,0.06); border-radius: 8px; border: 1px solid rgba(255,255,255,0.1);">
+              <span style="font-size: 0.7em; color: #94a3b8; font-family: monospace; font-weight: bold; text-transform: uppercase;">Frontend</span>
+              <div class="chip-group" style="margin-top: 4px;">
+                <span class="chip">React.js</span><span class="chip">Next.js</span><span class="chip">TypeScript</span><span class="chip">Tailwind CSS</span>
+              </div>
+            </div>
+            <div style="padding: 8px 10px; background: rgba(255,255,255,0.06); border-radius: 8px; border: 1px solid rgba(255,255,255,0.1);">
+              <span style="font-size: 0.7em; color: #94a3b8; font-family: monospace; font-weight: bold; text-transform: uppercase;">Backend & Languages</span>
+              <div class="chip-group" style="margin-top: 4px;">
+                <span class="chip">Node.js</span><span class="chip">Express</span><span class="chip">Python</span><span class="chip">Java</span><span class="chip">REST APIs</span>
+              </div>
+            </div>
+            <div style="padding: 8px 10px; background: rgba(255,255,255,0.06); border-radius: 8px; border: 1px solid rgba(255,255,255,0.1);">
+              <span style="font-size: 0.7em; color: #94a3b8; font-family: monospace; font-weight: bold; text-transform: uppercase;">Databases & DevOps</span>
+              <div class="chip-group" style="margin-top: 4px;">
+                <span class="chip">MySQL</span><span class="chip">PostgreSQL</span><span class="chip">Redis</span><span class="chip">Docker</span><span class="chip">Vercel</span>
+              </div>
+            </div>
+            <div style="padding: 8px 10px; background: rgba(255,255,255,0.06); border-radius: 8px; border: 1px solid rgba(255,255,255,0.1);">
+              <span style="font-size: 0.7em; color: #94a3b8; font-family: monospace; font-weight: bold; text-transform: uppercase;">Design & AI</span>
+              <div class="chip-group" style="margin-top: 4px;">
+                <span class="chip">Figma</span><span class="chip">OpenAI GPT</span><span class="chip">Claude API</span><span class="chip">System Design</span>
+              </div>
+            </div>
+          </div>
+          <div style="margin-top: 14px; display: flex; justify-content: space-between; align-items: center;">
+            <button class="action-btn" style="background: #e2e8f0; color: #020617; font-weight: 800; padding: 8px 14px; border-radius: 6px;" onclick="event.stopPropagation(); selectContainer(2);">See Built Projects →</button>
+            <a href="https://github.com/Jainam-03" target="_blank" rel="noopener noreferrer" style="font-size: 0.75em; color: #cbd5e1; text-decoration: none;" onclick="event.stopPropagation();">View GitHub Repos ↗</a>
+          </div>
+        `
+      },
+      {
+        id: 6,
+        color: '#e5322d',
+        faceColor: '#e5322d',
+        darkShade: '#a91f1b',
+        labelTop: 'WHAT',
+        labelBottom: 'I DO',
+        tag: '06',
+        desktopPos: { x: 0.24, y: 0.58, rx: -10, ry: 12, rz: 0 },
+        phonePos: { x: 0.28, y: 0.50, rx: -12, ry: 14, rz: 0 },
+        kicker: '06 / WHAT I DO & EXPERIENCE',
+        headingPrefix: 'What I ',
+        headingAccent: 'do.',
+        headingSuffix: '',
+        contentHtml: `
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin-top: 6px;">
+            <div>
+              <span style="font-size: 0.7em; color: #f87171; font-family: monospace; font-weight: bold; text-transform: uppercase;">Core Capabilities</span>
+              <div class="chip-group" style="margin-top: 6px;">
+                <span class="chip" style="background: rgba(239, 68, 68, 0.2); border-color: rgba(239, 68, 68, 0.35);">Full Stack Architecture</span>
+                <span class="chip" style="background: rgba(239, 68, 68, 0.2); border-color: rgba(239, 68, 68, 0.35);">REST & Microservices</span>
+                <span class="chip" style="background: rgba(239, 68, 68, 0.2); border-color: rgba(239, 68, 68, 0.35);">UI / UX Prototyping</span>
+                <span class="chip" style="background: rgba(239, 68, 68, 0.2); border-color: rgba(239, 68, 68, 0.35);">Database Optimization</span>
+                <span class="chip" style="background: rgba(239, 68, 68, 0.2); border-color: rgba(239, 68, 68, 0.35);">AI Workflow Integration</span>
+              </div>
+            </div>
+            <div style="padding: 10px 12px; font-size: 0.8em; color: #cbd5e1; background: rgba(255,255,255,0.06); border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); line-height: 1.5;">
+              <b style="color: #fff; display: block; margin-bottom: 4px;">Professional Track Record:</b>
+              Software Development Intern at Bluestock Fintech (Backend & API design). BCA 74.8% • MCA Candidate at Swaminarayan University (8.0 CGPA).
+            </div>
+          </div>
+          <div style="margin-top: 14px; display: flex; flex-wrap: wrap; gap: 8px;">
+            <button class="action-btn" style="background: #e5322d; color: #fff; font-weight: bold; padding: 8px 14px; border-radius: 6px;" onclick="event.stopPropagation(); selectContainer(2);">View Projects (02) →</button>
+            <button class="action-btn" style="background: rgba(255,255,255,0.15); color: #fff; padding: 8px 14px; border-radius: 6px;" onclick="event.stopPropagation(); openCvModal();">View Full CV</button>
+            <button class="action-btn" style="background: rgba(255,255,255,0.1); color: #cbd5e1; padding: 8px 14px; border-radius: 6px;" onclick="event.stopPropagation(); selectContainer(7);">Contact Me (07) ↗</button>
+          </div>
+        `
+      },
+      {
+        id: 7,
+        color: '#2546b8',
+        faceColor: '#2546b8',
+        darkShade: '#172f80',
+        labelTop: 'SAY',
+        labelBottom: 'HELLO',
+        tag: '07',
+        desktopPos: { x: 0.76, y: 0.58, rx: -10, ry: -12, rz: 0 },
+        phonePos: { x: 0.28, y: 0.63, rx: -12, ry: 12, rz: 0 },
+        kicker: '07 / SAY HELLO',
+        headingPrefix: 'Got an ',
+        headingAccent: 'idea?',
+        headingSuffix: '',
+        contentHtml: `
+          <p class="inside-text" style="font-size: 0.88em; color: #cbd5e1; margin-bottom: 8px;">Have a project in mind, a freelance opportunity, or just want to connect? Reach out directly or drop a message below.</p>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px;">
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+              <a href="mailto:jainamjainrj03@gmail.com" class="action-btn" style="background: rgba(56, 189, 248, 0.15); border: 1px solid rgba(56, 189, 248, 0.3); color: #38bdf8; padding: 10px 12px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center;" onclick="event.stopPropagation();">
+                <div>
+                  <div style="font-size: 0.68em; color: #94a3b8; text-transform: uppercase;">Direct Email</div>
+                  <div style="font-size: 0.85em; font-weight: bold; font-family: monospace;">jainamjainrj03@gmail.com</div>
+                </div>
+                <span>↗</span>
+              </a>
+              <a href="tel:+917878597484" class="action-btn" style="background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); color: #fff; padding: 10px 12px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center;" onclick="event.stopPropagation();">
+                <div>
+                  <div style="font-size: 0.68em; color: #94a3b8; text-transform: uppercase;">Phone / WhatsApp</div>
+                  <div style="font-size: 0.85em; font-weight: bold; font-family: monospace;">+91 7878597484</div>
+                </div>
+                <span>↗</span>
+              </a>
+              <div style="font-size: 0.72em; color: #94a3b8; padding: 4px 6px;">📍 India • Available for Remote & On-Site</div>
+            </div>
+            <div>
+              <form style="display: flex; flex-direction: column; gap: 8px;" onsubmit="event.preventDefault(); event.stopPropagation(); document.getElementById('formStatus').style.display='block'; this.reset();">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+                  <input type="text" placeholder="Your Name" required style="padding: 8px 10px; border-radius: 6px; background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.2); color: #fff; font-size: 0.8em; outline: none;" onclick="event.stopPropagation();">
+                  <input type="email" placeholder="Your Email" required style="padding: 8px 10px; border-radius: 6px; background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.2); color: #fff; font-size: 0.8em; outline: none;" onclick="event.stopPropagation();">
+                </div>
+                <div style="display: flex; gap: 8px;">
+                  <input type="text" placeholder="Project brief or message..." required style="flex: 1; padding: 8px 10px; border-radius: 6px; background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.2); color: #fff; font-size: 0.8em; outline: none;" onclick="event.stopPropagation();">
+                  <button type="submit" class="action-btn" style="background: #38bdf8; color: #020617; font-weight: 800; font-size: 0.8em; padding: 8px 16px; border-radius: 6px; cursor: pointer;" onclick="event.stopPropagation();">Send ↗</button>
+                </div>
+                <div id="formStatus" style="display: none; padding: 8px; border-radius: 6px; background: rgba(34, 197, 94, 0.2); border: 1px solid rgba(34, 197, 94, 0.4); color: #86efac; font-size: 0.8em; text-align: center; font-weight: bold;">Message transmitted successfully! I'll reply promptly.</div>
+              </form>
+            </div>
+          </div>
+        `
+      }
+    ];
+
+    // STAGE STATE
+    let stageWidth = 1200;
+    let stageHeight = 700;
+    let isMobile = false;
+    let heldContainerId = null;
+    let isSequenceRunning = false;
+    let queuedContainerId = null;
+
+    // DOM ELEMENTS
+    const stageEl = document.getElementById('stage');
+    const heapEl = document.getElementById('containersHeap');
+    const carriageEl = document.getElementById('craneCarriage');
+    const rodEl = document.getElementById('craneRod');
+    const fingerLeftEl = document.getElementById('fingerLeft');
+    const fingerRightEl = document.getElementById('fingerRight');
+    const armLeftEl = document.getElementById('armLeft');
+    const armRightEl = document.getElementById('armRight');
+
+    // BUILD 3D CONTAINERS IN DOM
+    function initContainers() {
+      heapEl.innerHTML = '';
+      CONTAINERS_DATA.forEach(data => {
+        const box = document.createElement('div');
+        box.className = 'container-box';
+        box.id = `container-${data.id}`;
+        box.tabIndex = 0;
+        box.setAttribute('role', 'button');
+        box.setAttribute('aria-label', `Container ${data.labelTop} ${data.labelBottom}`);
+
+        box.innerHTML = `
+          <!-- Solid Outer Back Wall -->
+          <div class="face face-back-outer" id="backOuter-${data.id}" style="background-color: ${data.darkShade};"></div>
+
+          <!-- Inner Back Face & Content -->
+          <div class="face face-back" id="back-${data.id}">
+            <div class="inside-content" onclick="event.stopPropagation()">
+              <div>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                  <span class="inside-kicker" style="color: ${data.color}">${data.kicker}</span>
+                  <button type="button" onclick="event.stopPropagation(); closeCurrentContainer();" style="padding: 2px 8px; border-radius: 4px; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.2); color: #fff; font-size: 0.7em; font-weight: 700; cursor: pointer;">✕ Close</button>
+                </div>
+                <div class="inside-heading">
+                  ${data.headingPrefix}<span class="accent-word" style="color: ${data.color}">${data.headingAccent}</span>${data.headingSuffix}
+                </div>
+                ${data.contentHtml}
+              </div>
+              <div style="font-size: 0.65em; color: #64748b; font-family: monospace; display: flex; justify-content: space-between; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 4px; margin-top: 8px;">
+                <span>DEPOT UNIT // 0${data.id}</span>
+                <span>STATUS: ACTIVE</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Top Face -->
+          <div class="face ribbed" id="top-${data.id}" style="background-color: ${data.faceColor};"></div>
+
+          <!-- Bottom Face -->
+          <div class="face" id="bottom-${data.id}" style="background-color: ${data.darkShade};"></div>
+
+          <!-- Left End Cap -->
+          <div class="face ribbed-dark" id="leftEnd-${data.id}" style="background-color: ${data.darkShade};"></div>
+
+          <!-- Right End Cap -->
+          <div class="face ribbed-dark" id="rightEnd-${data.id}" style="background-color: ${data.darkShade};"></div>
+
+          <!-- Left Door -->
+          <div class="face ribbed door-left" id="doorLeft-${data.id}" style="background-color: ${data.faceColor};">
+            <div class="door-label">${data.labelTop}<br>${data.labelBottom}</div>
+            <div class="door-rod"></div>
+          </div>
+
+          <!-- Right Door -->
+          <div class="face ribbed door-right" id="doorRight-${data.id}" style="background-color: ${data.faceColor};">
+            <div class="door-label">${data.labelTop}<br>${data.labelBottom}</div>
+            <div class="door-tag">${data.tag}</div>
+            <div class="door-rod"></div>
+          </div>
+        `;
+
+        // Direct click handler on the container
+        box.addEventListener('click', (e) => {
+          if (heldContainerId === data.id) {
+            e.stopPropagation();
+            return;
+          }
+          e.stopPropagation();
+          selectContainer(data.id);
+        });
+        box.addEventListener('mousedown', (e) => {
+          if (heldContainerId === data.id) {
+            e.stopPropagation();
+          }
+        });
+        box.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            selectContainer(data.id);
+          }
+        });
+
+        heapEl.appendChild(box);
+      });
+    }
+
+    // APPLY 3D DIMENSIONS TO CONTAINER FACES
+    function applyBoxGeometry(boxId, w, h, d, isLifted, doorsOpen) {
+      const box = document.getElementById(`container-${boxId}`);
+      if (!box) return;
+
+      box.style.setProperty('--half-width', `${w / 2}px`);
+      box.style.setProperty('--half-depth', `${d / 2}px`);
+      box.style.width = `${w}px`;
+      box.style.height = `${h}px`;
+
+      const backOuter = document.getElementById(`backOuter-${boxId}`);
+      if (backOuter) {
+        backOuter.style.width = `${w}px`;
+        backOuter.style.height = `${h}px`;
+        backOuter.style.transform = `translateZ(${-d / 2}px)`;
+        backOuter.style.pointerEvents = 'none';
+      }
+
+      const back = document.getElementById(`back-${boxId}`);
+      if (back) {
+        back.style.width = `${w}px`;
+        back.style.height = `${h}px`;
+        back.style.transform = (isLifted && doorsOpen) ? `translateZ(2px)` : `translateZ(${-d / 2 + 1}px)`;
+        back.style.pointerEvents = (isLifted && doorsOpen) ? 'auto' : 'none';
+      }
+
+      const top = document.getElementById(`top-${boxId}`);
+      if (top) {
+        top.style.width = `${w}px`;
+        top.style.height = `${d}px`;
+        top.style.transform = `translateY(${-d / 2}px) rotateX(90deg)`;
+        top.style.pointerEvents = isLifted ? 'none' : 'auto';
+      }
+
+      const bottom = document.getElementById(`bottom-${boxId}`);
+      if (bottom) {
+        bottom.style.width = `${w}px`;
+        bottom.style.height = `${d}px`;
+        bottom.style.transform = `translateY(${h - d / 2}px) rotateX(-90deg)`;
+        bottom.style.pointerEvents = 'none';
+      }
+
+      const leftEnd = document.getElementById(`leftEnd-${boxId}`);
+      if (leftEnd) {
+        leftEnd.style.width = `${d}px`;
+        leftEnd.style.height = `${h}px`;
+        leftEnd.style.transform = `translateX(${-d / 2}px) rotateY(-90deg)`;
+        leftEnd.style.pointerEvents = isLifted ? 'none' : 'auto';
+      }
+
+      const rightEnd = document.getElementById(`rightEnd-${boxId}`);
+      if (rightEnd) {
+        rightEnd.style.width = `${d}px`;
+        rightEnd.style.height = `${h}px`;
+        rightEnd.style.left = `${w - d}px`;
+        rightEnd.style.transform = `translateX(${d / 2}px) rotateY(90deg)`;
+        rightEnd.style.pointerEvents = isLifted ? 'none' : 'auto';
+      }
+
+      const doorLeft = document.getElementById(`doorLeft-${boxId}`);
+      if (doorLeft) {
+        doorLeft.style.width = `${w / 2}px`;
+        doorLeft.style.height = `${h}px`;
+        doorLeft.style.transform = `translateZ(${d / 2}px) rotateY(${doorsOpen ? (isMobile ? -90 : -118) : 0}deg)`;
+        doorLeft.style.pointerEvents = isLifted ? 'none' : 'auto';
+      }
+
+      const doorRight = document.getElementById(`doorRight-${boxId}`);
+      if (doorRight) {
+        doorRight.style.left = `${w / 2}px`;
+        doorRight.style.width = `${w / 2}px`;
+        doorRight.style.height = `${h}px`;
+        doorRight.style.transform = `translateZ(${d / 2}px) rotateY(${doorsOpen ? (isMobile ? 90 : 118) : 0}deg)`;
+        doorRight.style.pointerEvents = isLifted ? 'none' : 'auto';
+      }
+
+      const fontSize = Math.max(Math.round(h * (isMobile ? 0.25 : 0.28)), 13);
+      box.querySelectorAll('.door-label').forEach(el => el.style.fontSize = `${fontSize}px`);
+    }
+
+    // CALCULATE SIZES & POSITIONS
+    function computeGeometry() {
+      stageWidth = stageEl.clientWidth || window.innerWidth;
+      stageHeight = stageEl.clientHeight || (window.innerHeight - 72);
+      isMobile = stageWidth <= 720;
+
+      let baseW, baseH, baseD, liftedW, liftedH, liftedD;
+      if (isMobile) {
+        baseW = Math.min(Math.max(stageWidth * 0.36, 120), 150);
+        baseH = Math.round(baseW * 0.58);
+        baseD = Math.round(baseW * 0.52);
+        liftedW = Math.min(Math.max(stageWidth - 48, 260), 320);
+        liftedH = Math.min(Math.max(stageHeight * 0.54, 330), 430);
+        liftedD = Math.round(baseD * 1.2);
+      } else {
+        baseW = Math.min(Math.max(stageWidth * 0.16, 150), 235);
+        baseH = Math.round(baseW * 0.44);
+        baseD = Math.round(baseW * 0.40);
+        liftedW = Math.min(Math.max(stageWidth * 0.54, 620), 800);
+        liftedH = Math.min(Math.max(stageHeight * 0.48, 340), 420);
+        liftedD = Math.round(baseD * 1.3);
+      }
+
+      const showcaseX = stageWidth * 0.5;
+      const roofY = isMobile 
+        ? Math.max(90, Math.round(stageHeight * 0.12)) 
+        : Math.max(115, Math.round(stageHeight * 0.14));
+      const showcaseY = Math.round(roofY + liftedH / 2);
+
+      const showcaseZ = isMobile ? 30 : 320;
+
+      return { baseW, baseH, baseD, liftedW, liftedH, liftedD, showcaseX, showcaseY, showcaseZ, roofY };
+    }
+
+    function renderContainers() {
+      const geo = computeGeometry();
+
+      CONTAINERS_DATA.forEach(data => {
+        const box = document.getElementById(`container-${data.id}`);
+        if (!box) return;
+
+        const isLifted = heldContainerId === data.id;
+        const pos = isMobile ? data.phonePos : data.desktopPos;
+
+        const w = isLifted ? geo.liftedW : geo.baseW;
+        const h = isLifted ? geo.liftedH : geo.baseH;
+        const d = isLifted ? geo.liftedD : geo.baseD;
+
+        const x = isLifted ? geo.showcaseX : Math.round(pos.x * stageWidth);
+        const y = isLifted ? geo.showcaseY : Math.round(pos.y * stageHeight);
+        const z = isLifted ? geo.showcaseZ : (heldContainerId ? (isMobile ? -40 : -80) : 0);
+        const rx = isLifted ? (isMobile ? -2 : -4) : pos.rx;
+        const ry = isLifted ? (isMobile ? 0 : -3) : pos.ry;
+        const rz = isLifted ? 0 : pos.rz;
+
+        applyBoxGeometry(data.id, w, h, d, isLifted, false);
+
+        box.style.left = `${x}px`;
+        box.style.top = `${y}px`;
+        box.style.transform = `translate(-50%, -50%) translateZ(${z}px) rotateX(${rx}deg) rotateY(${ry}deg) rotateZ(${rz}deg)`;
+        box.style.zIndex = isLifted ? 1000 : Math.round(y);
+        box.style.opacity = '1';
+      });
+
+      // Update claw position
+      if (heldContainerId) {
+        const rodH = Math.max(30, geo.showcaseY - geo.liftedH / 2 - 82);
+        setClawPosition(geo.showcaseX, rodH, geo.liftedW, geo.showcaseZ);
+      } else {
+        setClawPosition(geo.showcaseX, 40, geo.baseW, 0);
+      }
+    }
+
+    // CLAW POSITION & FINGERS CONTROL
+    function setClawPosition(x, rodH, spanW, z = 0, transitionSec = 0.75) {
+      carriageEl.style.transition = `left ${transitionSec}s cubic-bezier(.55, 0, .25, 1), transform ${transitionSec}s cubic-bezier(.55, 0, .25, 1)`;
+      rodEl.style.transition = `height ${transitionSec}s cubic-bezier(.55, 0, .25, 1)`;
+      carriageEl.style.left = `${x}px`;
+      carriageEl.style.transform = `translateX(-50%) translateZ(${z}px)`;
+      rodEl.style.height = `${rodH}px`;
+
+      const halfSpan = Math.max(spanW + (spanW < 400 ? 12 : 28), 120) / 2;
+      armLeftEl.style.width = `${halfSpan}px`;
+      armRightEl.style.width = `${halfSpan}px`;
+    }
+
+    function setFingers(isOpen) {
+      if (isOpen) {
+        fingerLeftEl.className = 'crane-finger-left open';
+        fingerRightEl.className = 'crane-finger-right open';
+      } else {
+        fingerLeftEl.className = 'crane-finger-left closed';
+        fingerRightEl.className = 'crane-finger-right closed';
+      }
+    }
+
+    function sleep(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    function cycleNextContainer(e) {
+      if (e) e.stopPropagation();
+      const current = heldContainerId || 0;
+      const nextId = (current % 7) + 1;
+      selectContainer(nextId);
+    }
+
+    // CLOSE THE CURRENT CONTAINER AND RETURN TO PILE
+    async function closeCurrentContainer() {
+      if (isSequenceRunning || heldContainerId === null) return;
+      isSequenceRunning = true;
+
+      const targetId = heldContainerId;
+      const geo = computeGeometry();
+      const curBox = document.getElementById(`container-${targetId}`);
+      const curData = CONTAINERS_DATA.find(c => c.id === targetId);
+      const curPos = isMobile ? curData.phonePos : curData.desktopPos;
+
+      // 1a. Close doors (0.45s)
+      curBox.classList.remove('doors-open');
+      applyBoxGeometry(targetId, geo.liftedW, geo.liftedH, geo.liftedD, true, false);
+      await sleep(450);
+
+      // 1b. Lower back to pile spot & shrink (0.85s)
+      const pileX = Math.round(curPos.x * stageWidth);
+      const pileY = Math.round(curPos.y * stageHeight);
+      setClawPosition(pileX, Math.max(30, pileY - geo.baseH / 2 - 82), geo.baseW, 0, 0.85);
+
+      curBox.classList.remove('lifted');
+      applyBoxGeometry(targetId, geo.baseW, geo.baseH, geo.baseD, false, false);
+      curBox.style.left = `${pileX}px`;
+      curBox.style.top = `${pileY}px`;
+      curBox.style.transform = `translate(-50%, -50%) translateZ(0px) rotateX(${curPos.rx}deg) rotateY(${curPos.ry}deg) rotateZ(${curPos.rz}deg)`;
+      curBox.style.zIndex = Math.round(pileY);
+      curBox.style.opacity = '1';
+      await sleep(850);
+
+      // 1c. Open fingers (0.24s)
+      setFingers(true);
+      heldContainerId = null;
+
+      // Return background containers to normal pile Z = 0
+      CONTAINERS_DATA.forEach(c => {
+        if (c.id !== targetId) {
+          const b = document.getElementById(`container-${c.id}`);
+          if (b) {
+            const p = isMobile ? c.phonePos : c.desktopPos;
+            b.style.transform = `translate(-50%, -50%) translateZ(0px) rotateX(${p.rx}deg) rotateY(${p.ry}deg) rotateZ(${p.rz}deg)`;
+          }
+        }
+      });
+
+      await sleep(240);
+
+      // Raise claw slightly
+      setClawPosition(pileX, 40, geo.baseW, 0, 0.35);
+      await sleep(350);
+
+      document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+
+      isSequenceRunning = false;
+      if (queuedContainerId !== null) {
+        const next = queuedContainerId;
+        queuedContainerId = null;
+        selectContainer(next);
+      }
+    }
+
+    // STAGE CLICK HANDLER: Closes container ONLY if clicked outside
+    function handleStageClick(e) {
+      if (
+        e.target.closest('.container-box') ||
+        e.target.closest('.inside-content') ||
+        e.target.closest('.cv-modal') ||
+        e.target.closest('header') ||
+        e.target.closest('.frosted-pill') ||
+        e.target.closest('button') ||
+        e.target.closest('a') ||
+        e.target.closest('input') ||
+        e.target.closest('textarea')
+      ) {
+        return;
+      }
+      if (heldContainerId !== null && !isSequenceRunning) {
+        closeCurrentContainer();
+      }
+    }
+
+    // THE MASTER PICK SEQUENCE
+    async function selectContainer(targetId) {
+      if (isSequenceRunning) {
+        queuedContainerId = targetId;
+        return;
+      }
+
+      if (heldContainerId === targetId) {
+        const box = document.getElementById(`container-${targetId}`);
+        if (box && box.classList.contains('doors-open')) return;
+      }
+
+      isSequenceRunning = true;
+      const geo = computeGeometry();
+
+      // Step 1: Put back currently held container if holding one
+      if (heldContainerId !== null && heldContainerId !== targetId) {
+        const curBox = document.getElementById(`container-${heldContainerId}`);
+        const curData = CONTAINERS_DATA.find(c => c.id === heldContainerId);
+        const curPos = isMobile ? curData.phonePos : curData.desktopPos;
+
+        // 1a. Close doors (0.45s)
+        curBox.classList.remove('doors-open');
+        applyBoxGeometry(heldContainerId, geo.liftedW, geo.liftedH, geo.liftedD, true, false);
+        await sleep(450);
+
+        // 1b. Lower back to pile spot & shrink back (0.85s)
+        const pileX = Math.round(curPos.x * stageWidth);
+        const pileY = Math.round(curPos.y * stageHeight);
+        setClawPosition(pileX, Math.max(30, pileY - geo.baseH / 2 - 82), geo.baseW, 0, 0.85);
+
+        curBox.classList.remove('lifted');
+        applyBoxGeometry(heldContainerId, geo.baseW, geo.baseH, geo.baseD, false, false);
+        curBox.style.left = `${pileX}px`;
+        curBox.style.top = `${pileY}px`;
+        curBox.style.transform = `translate(-50%, -50%) translateZ(0px) rotateX(${curPos.rx}deg) rotateY(${curPos.ry}deg) rotateZ(${curPos.rz}deg)`;
+        curBox.style.zIndex = Math.round(pileY);
+        curBox.style.opacity = '1';
+        await sleep(850);
+
+        // 1c. Open fingers (0.24s)
+        setFingers(true);
+        heldContainerId = null;
+        await sleep(240);
+
+        // Raise claw slightly
+        setClawPosition(pileX, 40, geo.baseW, 0, 0.35);
+        await sleep(350);
+      }
+
+      // Step 2: Claw travels to above target container (0.75s)
+      const targetData = CONTAINERS_DATA.find(c => c.id === targetId);
+      const targetPos = isMobile ? targetData.phonePos : targetData.desktopPos;
+      const targetPileX = Math.round(targetPos.x * stageWidth);
+      const targetPileY = Math.round(targetPos.y * stageHeight);
+
+      setFingers(true);
+      setClawPosition(targetPileX, 40, geo.baseW, 0, 0.75);
+      await sleep(750);
+
+      // Step 3: Claw drops down onto container (0.56s)
+      const dropRodH = Math.max(30, targetPileY - geo.baseH / 2 - 82);
+      setClawPosition(targetPileX, dropRodH, geo.baseW, 0, 0.56);
+      await sleep(560);
+
+      // Step 4: Fingers close and grip (0.24s)
+      setFingers(false);
+      await sleep(240);
+
+      // Step 5: Claw lifts it to top centre (0.95s), brings forward to Z = showcaseZ
+      heldContainerId = targetId;
+      const targetBox = document.getElementById(`container-${targetId}`);
+      targetBox.classList.add('lifted');
+      applyBoxGeometry(targetId, geo.liftedW, geo.liftedH, geo.liftedD, true, false);
+
+      const liftedRodH = Math.max(30, geo.showcaseY - geo.liftedH / 2 - 82);
+      setClawPosition(geo.showcaseX, liftedRodH, geo.liftedW, geo.showcaseZ, 0.95);
+
+      targetBox.style.left = `${geo.showcaseX}px`;
+      targetBox.style.top = `${geo.showcaseY}px`;
+      targetBox.style.transform = `translate(-50%, -50%) translateZ(${geo.showcaseZ}px) rotateX(${isMobile ? -2 : -4}deg) rotateY(${isMobile ? 0 : -3}deg) rotateZ(0deg)`;
+      targetBox.style.zIndex = 1000;
+
+      // Push all background containers deeper into the yard (Z = -80px desktop, -40px mobile) to guarantee zero 3D intersection!
+      CONTAINERS_DATA.forEach(c => {
+        if (c.id !== targetId) {
+          const b = document.getElementById(`container-${c.id}`);
+          if (b) {
+            const p = isMobile ? c.phonePos : c.desktopPos;
+            const bgZ = isMobile ? -40 : -80;
+            b.style.transform = `translate(-50%, -50%) translateZ(${bgZ}px) rotateX(${p.rx}deg) rotateY(${p.ry}deg) rotateZ(${p.rz}deg)`;
+            b.style.opacity = '1';
+          }
+        }
+      });
+
+      await sleep(950);
+
+      // Step 6: Doors swing open (-122deg and +122deg) over 0.75s
+      targetBox.classList.add('doors-open');
+      applyBoxGeometry(targetId, geo.liftedW, geo.liftedH, geo.liftedD, true, true);
+      await sleep(750);
+
+      // Highlight active nav item
+      document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+      const activeNavMap = { 2: 0, 3: 1, 4: 2, 7: 3 };
+      if (activeNavMap[targetId] !== undefined) {
+        document.querySelectorAll('.nav-btn')[activeNavMap[targetId]].classList.add('active');
+      }
+
+      isSequenceRunning = false;
+
+      // If another click arrived during sequence, run it next
+      if (queuedContainerId !== null && queuedContainerId !== targetId) {
+        const next = queuedContainerId;
+        queuedContainerId = null;
+        selectContainer(next);
+      }
+    }
+
+    // KEYBOARD ESCAPE & SHORTCUTS
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeCvModal();
+        closeCurrentContainer();
+      }
+    });
+
+    // CV MODAL
+    function openCvModal() {
+      document.getElementById('cvModal').classList.add('open');
+    }
+
+    function closeCvModal() {
+      document.getElementById('cvModal').classList.remove('open');
+    }
+
+    // INITIAL SETUP (Containers start in pile, claw waits on rail)
+    window.addEventListener('resize', () => {
+      renderContainers();
+    });
+
+    window.addEventListener('DOMContentLoaded', () => {
+      initContainers();
+      renderContainers();
+    });
+  </script>
+</body>
+</html>

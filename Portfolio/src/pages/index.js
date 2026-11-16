@@ -1,77 +1,20 @@
-import { motion } from 'framer-motion'
-import Header from '@/components/layout/Header'
-import Footer from '@/components/layout/Footer'
-import Hero from '@/components/hero/Hero'
-import About from '@/components/about/About'
-import Experience from '@/components/experience/Experience'
-import Skills from '@/components/skills/Skills'
-import Projects from '@/components/projects/Projects'
-import Contact from '@/components/contact/Contact'
-import RobotGuide from '@/components/common/RobotGuide'
+import Head from 'next/head';
+import DepotPortfolio from '@/components/depot/DepotPortfolio';
 
 export default function Home() {
-  const revealVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { 
-      opacity: 1, 
-      y: 0, 
-      transition: { duration: 0.8, ease: "easeOut" } 
-    }
-  }
-
   return (
-    <div className="min-h-screen bg-[#020617] selection:bg-cyan-500 selection:text-slate-950">
-      <Header />
-      <main className="overflow-hidden">
-        <Hero />
-        
-        <motion.section 
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={revealVariants}
-        >
-          <About />
-        </motion.section>
+    <>
+      <Head>
+        <title>Jainam Jain — The Portfolio Depot | Shipping Container Claw Portfolio</title>
+        <meta
+          name="description"
+          content="Interactive 3D Shipping Container Claw Portfolio for Jainam Jain, high-performance software engineer and vibe coder."
+        />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
 
-        <motion.section 
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={revealVariants}
-        >
-          <Experience />
-        </motion.section>
-
-        <motion.section 
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={revealVariants}
-        >
-          <Skills />
-        </motion.section>
-
-        <motion.section 
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={revealVariants}
-        >
-          <Projects />
-        </motion.section>
-
-        <motion.section 
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={revealVariants}
-        >
-          <Contact />
-        </motion.section>
-      </main>
-      <Footer />
-      <RobotGuide />
-    </div>
-  )
+      <DepotPortfolio />
+    </>
+  );
 }
